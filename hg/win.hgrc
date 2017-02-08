@@ -1,0 +1,6 @@
+[ui]
+ignore = ~/_hgignore_global
+merge = p4merge
+
+[extdiff]
+p4merge =

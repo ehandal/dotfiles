@@ -1,0 +1,5 @@
+set editing-mode vi
+
+set keymap vi
+"gg": beginning-of-history
+"G": end-of-history

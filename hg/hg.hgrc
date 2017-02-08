@@ -1,0 +1,37 @@
+[ui]
+username = Edgar Handal <ehandal@gmail.com>
+editor = vim
+
+[tortoisehg]
+editor = gvim
+ui.language = en
+
+[extensions]
+color =
+extdiff = 
+fetch =
+purge =
+
+[email]
+method = smtp
+
+[smtp]
+host = smtp.gmail.com
+port = 587
+tls = True
+username = ehandal@gmail.com
+
+[merge-tools]
+diffmerge.executable = diffmerge
+diffmerge.args = -merge -result=$output -t1="Local Version" -t2=$output -t3="Other Version" -caption=$output $local $base $other
+diffmerge.binary = False
+diffmerge.symlinks = False
+diffmerge.gui = True
+
+p4merge.executable = p4merge
+p4merge.premerge = True
+p4merge.args = $base $local $other $output
+p4merge.gui = True
+p4merge.binary = False
+
+kdiff3.args = $base $local $other -o $output

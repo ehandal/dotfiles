@@ -1,0 +1,12 @@
+" Turn off audible and visual bells
+set visualbell
+hi Bell display: none;
+
+set complete=ls
+
+nmap J gT
+nmap K gt
+nmap s :open google 
+nmap S :tabopen google 
+
+" vim: set ft=vimperator:

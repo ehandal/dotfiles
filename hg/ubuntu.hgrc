@@ -1,0 +1,8 @@
+[ui]
+merge = meld
+
+[extdiff]
+vdiff = meld
+
+[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt

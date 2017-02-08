@@ -1,0 +1,12 @@
+" Turn off audible and visual bells
+set visualbell
+hi Bell display: none;
+
+set complete=location,search
+set guioptions+=T
+
+" Easier tab switching
+nmap J gT
+nmap K gt
+
+set passkeys+=facebook.com:<CR>
