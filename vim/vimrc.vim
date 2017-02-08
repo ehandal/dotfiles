@@ -7,14 +7,15 @@ else
 endif
 
 " github
-Plug 'embear/vim-localvimrc'
 "Plug 'ervandew/supertab'
+Plug 'embear/vim-localvimrc'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'vimperator/vimperator.vim'
 
 " vim-scripts
 Plug 'Colour-Sampler-Pack'
