@@ -8,5 +8,3 @@ nmap J gT
 nmap K gt
 nmap s :open google 
 nmap S :tabopen google 
-
-" vim: set ft=vimperator:
