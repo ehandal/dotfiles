@@ -1,33 +1,29 @@
 set nocompatible
 
-filetype off
 if has('win32') || has('win64')
-    set rtp+=~/vimfiles/bundle/vundle
-    call vundle#rc('~/vimfiles/bundle')
+    call plug#begin('~/vimfiles/plugged')
 else
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    call plug#begin('~/.vim/plugged')
 endif
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
 " github
-Bundle 'embear/vim-localvimrc'
-"Bundle 'ervandew/supertab'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'godlygeek/csapprox'
-Bundle 'godlygeek/tabular'
-Bundle 'hdima/python-syntax'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
+Plug 'embear/vim-localvimrc'
+"Plug 'ervandew/supertab'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'godlygeek/csapprox'
+Plug 'godlygeek/tabular'
+Plug 'hdima/python-syntax'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 " vim-scripts
-Bundle 'Colour-Sampler-Pack'
-Bundle 'camelcasemotion'
+Plug 'Colour-Sampler-Pack'
+Plug 'camelcasemotion'
 
 " non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
+"Plug 'git://git.wincent.com/command-t.git'
+
+call plug#end()
 
 filetype plugin indent on
 syntax on
