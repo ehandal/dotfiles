@@ -103,9 +103,5 @@ autocmd FileType python setlocal foldmethod=indent
 
 let c_space_errors = 1
 let python_highlight_all = 1
-"let python_slow_sync = 1
-
-let g:miniBufExplCheckDupeBufs = 0
-
 
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
