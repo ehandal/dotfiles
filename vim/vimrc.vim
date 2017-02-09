@@ -7,7 +7,6 @@ else
 endif
 
 " github
-"Plug 'ervandew/supertab'
 Plug 'embear/vim-localvimrc'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'godlygeek/csapprox'
@@ -20,9 +19,6 @@ Plug 'vimperator/vimperator.vim'
 " vim-scripts
 Plug 'Colour-Sampler-Pack'
 Plug 'camelcasemotion'
-
-" non github repos
-"Plug 'git://git.wincent.com/command-t.git'
 
 call plug#end()
 
@@ -41,11 +37,10 @@ set wildmode=longest:full,full
 set guioptions-=T
 set foldmethod=syntax
 set foldopen-=block
-set nobackup
 set nowrap
 set nostartofline
 set ruler
-set history=50
+set history=1000
 set showcmd
 set incsearch
 set hlsearch
@@ -53,16 +48,20 @@ set mouse=a
 set mousemodel=popup
 set backspace=indent,eol,start
 set formatprg=par
-
-" Turn off audible and visual bell
 set visualbell t_vb=
+
+set undofile
+set nobackup
 
 if has('win32') || has('win64')
     colorscheme default
-    set directory+=$TEMP
+    set directory^=~/vimfiles/swap//
+    set undodir=~/vimfiles/undo
 else
-    colorscheme asu1dark
     set t_Co=256
+    colorscheme asu1dark
+    set directory^=~/.vim/swap//
+    set undodir=~/.vim/undo
 endif
 
 nnoremap <silent> <Leader>c :setlocal cursorline!<CR>
@@ -70,24 +69,15 @@ nnoremap <silent> <Leader>c :setlocal cursorline!<CR>
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" CTRL-Tab is Next window
-noremap <C-Tab> <C-W>w
-inoremap <C-Tab> <C-O><C-W>w
-cnoremap <C-Tab> <C-C><C-W>w
-onoremap <C-Tab> <C-C><C-W>w
-
 " Window travel
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
 noremap <C-H> <C-W>h
 noremap <C-L> <C-W>l
 
-" Some shortcuts
 nmap Y y$
-nmap <Left>    :bp<CR>
-nmap <Right>   :bn<CR>
-nmap <S-Left>  gT
-nmap <S-Right> gt
+nmap <Left>  :bp<CR>
+nmap <Right> :bn<CR>
 
 " When editing a file, always jump to the last known cursor position.  Don't
 " do it when the position is invalid or when inside an event handler (happens
@@ -98,10 +88,9 @@ autocmd BufReadPost *
 \   exe "normal! g`\"" |
 \ endif
 
-autocmd FileType java setlocal noexpandtab
-autocmd FileType python setlocal foldmethod=indent
-
 let c_space_errors = 1
 let python_highlight_all = 1
 
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
+autocmd FileType java setlocal noexpandtab
+autocmd FileType python setlocal foldmethod=indent
