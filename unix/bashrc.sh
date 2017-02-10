@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
+# don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
@@ -17,20 +17,32 @@ shopt -s checkwinsize
 
 STARTCOLOR="\[\e[1;32m\]";
 ENDCOLOR="\[\e[m\]";
-export PS1="$STARTCOLOR\W\$ $ENDCOLOR"
-
-# If this is an xterm set the title to dir [user@host]
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;\w [\u@\h]\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+if [ -n "$SSH_CLIENT" ]; then
+    export PS1="$STARTCOLOR[\h] \W\$$ENDCOLOR "
+    case "$TERM" in
+    xterm*|rxvt*)
+        PS1="\[\e]0;\w [\h]\a\]$PS1"
+        ;;
+    *)
+        ;;
+    esac
+else
+    export PS1="$STARTCOLOR\W\$$ENDCOLOR "
+    case "$TERM" in
+    xterm*|rxvt*)
+        PS1="\[\e]0;\w\a\]$PS1"
+        ;;
+    *)
+        ;;
+    esac
+fi
 
 set -o vi
 
-# enable programmable completion features
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+fi
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
