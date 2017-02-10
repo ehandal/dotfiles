@@ -64,10 +64,9 @@ else
     set undodir=~/.vim/undo
 endif
 
+let mapleader = "\<space>"
 nnoremap <silent> <Leader>c :setlocal cursorline!<CR>
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
+nnoremap <silent> <leader>n :nohlsearch<CR>
 
 " Window travel
 noremap <C-J> <C-W>j
