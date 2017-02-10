@@ -65,7 +65,7 @@ else
 endif
 
 let mapleader = "\<space>"
-nnoremap <silent> <Leader>c :setlocal cursorline!<CR>
+nnoremap <silent> <leader>c :setlocal cursorline!<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
 
 " Window travel
