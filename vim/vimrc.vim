@@ -58,7 +58,6 @@ if has('win32') || has('win64')
     set directory^=~/vimfiles/swap//
     set undodir=~/vimfiles/undo
 else
-    set t_Co=256
     colorscheme asu1dark
     set directory^=~/.vim/swap//
     set undodir=~/.vim/undo
