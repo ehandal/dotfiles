@@ -26,18 +26,12 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set smarttab
 set number
 set hidden
 set virtualedit=block
 set wildmenu
 set wildmode=longest:full,full
 set guioptions-=T
-set foldmethod=syntax
-set foldopen-=block
 set nowrap
 set nostartofline
 set ruler
@@ -50,6 +44,15 @@ set mousemodel=popup
 set backspace=indent,eol,start
 set formatprg=par
 set visualbell t_vb=
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+
+set nofoldenable
+set foldmethod=syntax
+set foldopen-=block
 
 set undofile
 set nobackup
