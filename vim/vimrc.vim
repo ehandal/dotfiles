@@ -7,14 +7,15 @@ else
 endif
 
 " github
+Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
 Plug 'vimperator/vimperator.vim'
 
 " vim-scripts
@@ -56,6 +57,12 @@ set foldopen-=block
 
 set undofile
 set nobackup
+
+set laststatus=2
+let g:airline_extensions = ['tabline']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:tmuxline_powerline_separators = 0
 
 if has('win32') || has('win64')
     colorscheme default
