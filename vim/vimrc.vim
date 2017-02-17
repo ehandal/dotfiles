@@ -61,6 +61,7 @@ set laststatus=2
 let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_tab_type = 0
 let g:tmuxline_powerline_separators = 0
 
 if has('win32') || has('win64')
