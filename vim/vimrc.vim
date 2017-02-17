@@ -32,7 +32,6 @@ set hidden
 set virtualedit=block
 set wildmenu
 set wildmode=longest:full,full
-set guioptions-=T
 set nowrap
 set nostartofline
 set ruler
