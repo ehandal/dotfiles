@@ -3,6 +3,11 @@ promptinit
 
 # vi mode
 bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^r' history-incremental-search-backward
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
 
 setopt auto_cd
 setopt auto_pushd
@@ -62,16 +67,13 @@ setopt always_to_end
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache
 
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' group-name ''
 zstyle ':completion:*:*:*:*:*' menu select
 eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+
+zstyle '*' single-ignored show
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
