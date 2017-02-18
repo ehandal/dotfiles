@@ -58,6 +58,8 @@ set undofile
 set nobackup
 
 set laststatus=2
+set ttimeoutlen=10
+set noshowmode
 let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
