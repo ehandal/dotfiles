@@ -7,6 +7,7 @@ else
 endif
 
 " github
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
 Plug 'godlygeek/csapprox'
@@ -79,12 +80,6 @@ endif
 let mapleader = "\<space>"
 nnoremap <silent> <leader>c :setlocal cursorline!<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
-
-" Window travel
-noremap <C-J> <C-W>j
-noremap <C-K> <C-W>k
-noremap <C-H> <C-W>h
-noremap <C-L> <C-W>l
 
 nmap Y y$
 nmap <Left>  :bp<CR>
