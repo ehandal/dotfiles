@@ -83,7 +83,6 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 alias ls='ls --color=tty'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 
-local tab_name="%15<..<%~%<<" #15 char left truncated PWD
 if [ -n "$SSH_CLIENT" ]; then
     local win_name="%n@%m: %~"
     local prompt='[%m] %c'
@@ -91,17 +90,21 @@ else
     local win_name="%~"
     local prompt='%c'
 fi
-case "$TERM" in
-    cygwin|xterm*|putty*|rxvt*|ansi)
-        print -Pn "\e]2;$win_name:q\a" # set window name
-        print -Pn "\e]1;$tab_name:q\a" # set tab name
-        ;;
-    screen*)
-        print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
-        ;;
-    *)
-        ;;
-esac
+
+function precmd() {
+    local tab_name="%15<..<%~%<<" #15 char left truncated PWD
+    case "$TERM" in
+        cygwin|xterm*|putty*|rxvt*|ansi)
+            print -Pn "\e]2;$win_name:q\a" # set window name
+            print -Pn "\e]1;$tab_name:q\a" # set tab name
+            ;;
+        screen*)
+            print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
+            ;;
+        *)
+            ;;
+    esac
+}
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT="${ret_status} %{$fg[cyan]%}$prompt%{$reset_color%} "
