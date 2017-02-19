@@ -8,7 +8,7 @@ ln -si config/tmux.conf .tmux.conf
 ln -si config/vimperatorrc .vimperatorrc
 ln -si config/vimrc .vimrc
 ln -si config/zshrc .zshrc
-ln -siT config/vim/vimfiles .vim
+ln -siT config/vim .vim
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
