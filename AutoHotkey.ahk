@@ -1,38 +1,275 @@
-; IMPORTANT INFO ABOUT GETTING STARTED: Lines that start with a
-; semicolon, such as this one, are comments.  They are not executed.
+; See https://gist.github.com/sedm0784/4443120
+g_LastCapsLockKeyDownTime := 0
+g_CapsLockRepeatDetected := false
 
-; This script has a special filename and path because it is automatically
-; launched when you run the program directly.  Also, any text file whose
-; name ends in .ahk is associated with the program, which means that it
-; can be launched simply by double-clicking it.  You can have as many .ahk
-; files as you want, located in any folder.  You can also run more than
-; one ahk file simultaneously and each will get its own tray icon.
+g_LastEnterKeyDownTime := 0
+g_EnterRepeatDetected := false
 
-; SAMPLE HOTKEYS: Below are two sample hotkeys.  The first is Win+Z and it
-; launches a web site in the default browser.  The second is Control+Alt+N
-; and it launches a new Notepad window (or activates an existing one).  To
-; try out these hotkeys, run AutoHotkey again, which will load this file.
+g_AbortSend := false
+g_Timeout := 250
 
-;#z::Run www.autohotkey.com
+*CapsLock::
+    if (g_CapsLockRepeatDetected)
+    {
+        return
+    }
 
-;!n::
-;IfWinExist Untitled - Notepad;
-;	WinActivate
-;else
-;	Run Notepad
-;return
+    send,{Ctrl down}
+    g_LastCapsLockKeyDownTime := A_TickCount
+    g_AbortSend := false
+    g_CapsLockRepeatDetected := true
+    return
 
-SetCapsLockState, off
-Capslock::Esc
-;LAlt::LCtrl
-;LCtrl::LAlt
-;RAlt::RCtrl
-;RCtrl::RAlt
+*CapsLock Up::
+    send,{Ctrl up}
+    g_CapsLockRepeatDetected := false
+    if (g_AbortSend)
+    {
+        return
+    }
+    current_time := A_TickCount
+    time_elapsed := current_time - g_LastCapsLockKeyDownTime
+    if (time_elapsed <= g_Timeout)
+    {
+        SendInput {Esc}
+    }
+    return
 
-; Note: From now on whenever you run AutoHotkey directly, this script
-; will be loaded.  So feel free to customize it to suit your needs.
+*Enter::
+    if (g_EnterRepeatDetected)
+    {
+        return
+    }
 
-; Please read the QUICK-START TUTORIAL near the top of the help file.
-; It explains how to perform common automation tasks such as sending
-; keystrokes and mouse clicks.  It also explains more about hotkeys.
+    send,{Ctrl down}
+    g_LastEnterKeyDownTime := A_TickCount
+    g_AbortSend := false
+    g_EnterRepeatDetected := true
+    return
 
+*Enter Up::
+    send,{Ctrl up}
+    g_EnterRepeatDetected := false
+    if (g_AbortSend)
+    {
+        return
+    }
+    current_time := A_TickCount
+    time_elapsed := current_time - g_LastEnterKeyDownTime
+    if (time_elapsed <= g_Timeout)
+    {
+        SendInput {Enter}
+    }
+    return
+
+*^Enter::
+    if (g_EnterRepeatDetected)
+    {
+        return
+    }
+    g_AbortSend := true
+    SendInput ^{Enter}
+~*^a::
+    g_AbortSend := true
+    return
+~*^b::
+    g_AbortSend := true
+    return
+~*^c::
+    g_AbortSend := true
+    return
+~*^d::
+    g_AbortSend := true
+    return
+~*^e::
+    g_AbortSend := true
+    return
+~*^f::
+    g_AbortSend := true
+    return
+~*^g::
+    g_AbortSend := true
+    return
+~*^h::
+    g_AbortSend := true
+    return
+~*^i::
+    g_AbortSend := true
+    return
+~*^j::
+    g_AbortSend := true
+    return
+~*^k::
+    g_AbortSend := true
+    return
+~*^l::
+    g_AbortSend := true
+    return
+~*^m::
+    g_AbortSend := true
+    return
+~*^n::
+    g_AbortSend := true
+    return
+~*^o::
+    g_AbortSend := true
+    return
+~*^p::
+    g_AbortSend := true
+    return
+~*^q::
+    g_AbortSend := true
+    return
+~*^r::
+    g_AbortSend := true
+    return
+~*^s::
+    g_AbortSend := true
+    return
+~*^t::
+    g_AbortSend := true
+    return
+~*^u::
+    g_AbortSend := true
+    return
+~*^v::
+    g_AbortSend := true
+    return
+~*^w::
+    g_AbortSend := true
+    return
+~*^x::
+    g_AbortSend := true
+    return
+~*^y::
+    g_AbortSend := true
+    return
+~*^z::
+    g_AbortSend := true
+    return
+~*^1::
+    g_AbortSend := true
+    return
+~*^2::
+    g_AbortSend := true
+    return
+~*^3::
+    g_AbortSend := true
+    return
+~*^4::
+    g_AbortSend := true
+    return
+~*^5::
+    g_AbortSend := true
+    return
+~*^6::
+    g_AbortSend := true
+    return
+~*^7::
+    g_AbortSend := true
+    return
+~*^8::
+    g_AbortSend := true
+    return
+~*^9::
+    g_AbortSend := true
+    return
+~*^0::
+    g_AbortSend := true
+    return
+~*^Space::
+    g_AbortSend := true
+    return
+~*^Backspace::
+    g_AbortSend := true
+    return
+~*^Delete::
+    g_AbortSend := true
+    return
+~*^Insert::
+    g_AbortSend := true
+    return
+~*^Home::
+    g_AbortSend := true
+    return
+~*^End::
+    g_AbortSend := true
+    return
+~*^PgUp::
+    g_AbortSend := true
+    return
+~*^PgDn::
+    g_AbortSend := true
+    return
+~*^Tab::
+    g_AbortSend := true
+    return
+~*^,::
+    g_AbortSend := true
+    return
+~*^.::
+    g_AbortSend := true
+    return
+~*^/::
+    g_AbortSend := true
+    return
+~*^;::
+    g_AbortSend := true
+    return
+~*^'::
+    g_AbortSend := true
+    return
+~*^[::
+    g_AbortSend := true
+    return
+~*^]::
+    g_AbortSend := true
+    return
+~*^\::
+    g_AbortSend := true
+    return
+~*^-::
+    g_AbortSend := true
+    return
+~*^=::
+    g_AbortSend := true
+    return
+~*^`::
+    g_AbortSend := true
+    return
+~*^F1::
+    g_AbortSend := true
+    return
+~*^F2::
+    g_AbortSend := true
+    return
+~*^F3::
+    g_AbortSend := true
+    return
+~*^F4::
+    g_AbortSend := true
+    return
+~*^F5::
+    g_AbortSend := true
+    return
+~*^F6::
+    g_AbortSend := true
+    return
+~*^F7::
+    g_AbortSend := true
+    return
+~*^F8::
+    g_AbortSend := true
+    return
+~*^F9::
+    g_AbortSend := true
+    return
+~*^F10::
+    g_AbortSend := true
+    return
+~*^F11::
+    g_AbortSend := true
+    return
+~*^F12::
+    g_AbortSend := true
+    return
