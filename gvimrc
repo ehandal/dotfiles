@@ -3,7 +3,7 @@ if has('win32') || has('win64')
 elseif has('mac')
     set guifont=Menlo:h12
 else
-    set guifont=Monospace\ 9
+    set guifont=Ubuntu\ Mono\ 11
 endif
 
 colorscheme asu1dark
