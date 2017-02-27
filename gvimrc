@@ -1,5 +1,6 @@
 if has('win32') || has('win64')
-    set guifont=Bitstream_Vera_Sans_Mono:h9:cANSI,Consolas:h9:cANSI
+    set guifont=DejaVu_Sans_Mono:h9:cANSI,Consolas:h9:cANSI
+    set encoding=utf-8
 elseif has('mac')
     set guifont=Menlo:h12
 else
