@@ -1,4 +1,5 @@
 ; See https://gist.github.com/sedm0784/4443120
+SetCapsLockState, AlwaysOff
 g_LastCapsLockKeyDownTime := 0
 g_CapsLockRepeatDetected := false
 
