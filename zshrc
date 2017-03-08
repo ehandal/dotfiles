@@ -98,6 +98,9 @@ function precmd() {
             print -Pn "\e]2;$win_name:q\a" # set window name
             print -Pn "\e]1;$tab_name:q\a" # set tab name
             ;;
+        screen*)
+            print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
+            ;;
         *)
             ;;
     esac
