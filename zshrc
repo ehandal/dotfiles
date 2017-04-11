@@ -104,6 +104,12 @@ function precmd() {
         *)
             ;;
     esac
+
+    if [ -z "$STY" -a -z "$TMUX" ]; then
+        echo $DISPLAY > ~/.display
+    else
+        export DISPLAY=`cat ~/.display`
+    fi
 }
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
