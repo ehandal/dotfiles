@@ -26,7 +26,7 @@ Plug 'camelcasemotion'
 call plug#end()
 
 filetype plugin indent on
-syntax on
+syntax enable
 
 set number
 set hidden
