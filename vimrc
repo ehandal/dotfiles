@@ -17,11 +17,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'vim-scripts/camelcasemotion'
 Plug 'vimperator/vimperator.vim'
-
-" vim-scripts
-Plug 'Colour-Sampler-Pack'
-Plug 'camelcasemotion'
 
 call plug#end()
 
