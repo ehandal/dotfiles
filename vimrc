@@ -96,6 +96,6 @@ let c_space_errors = 1
 let python_highlight_all = 1
 
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
-autocmd FileType c,cpp,cs setlocal commentstring=//%s
+autocmd FileType arduino,c,cpp,cs setlocal commentstring=//%s
 autocmd FileType java setlocal noexpandtab
 autocmd FileType python setlocal foldmethod=indent
