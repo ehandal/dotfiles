@@ -6,7 +6,6 @@ else
     call plug#begin('~/.vim/plugged')
 endif
 
-" github
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
@@ -21,6 +20,15 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'vimperator/vimperator.vim'
+
+" colorschemes
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
