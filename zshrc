@@ -113,7 +113,7 @@ function precmd() {
 }
 
 local ret_status="%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)"
-PROMPT="${ret_status} %{$fg[cyan]%}$prompt%{$reset_color%} "
+PROMPT="%{$fg_bold[cyan]%}$prompt ${ret_status}%{$reset_color%} "
 
 # Use modern completion system
 autoload -Uz compinit && compinit

@@ -7,7 +7,8 @@ else
     set guifont=Ubuntu\ Mono\ 11
 endif
 
-colorscheme asu1dark
+set background=dark
+colorscheme base16-tomorrow-night
 
 set vb t_vb=
 set guioptions-=T

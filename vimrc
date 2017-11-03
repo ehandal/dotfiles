@@ -30,6 +30,8 @@ Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0ng/vim-hybrid'
 
+" Plug 'tmux-plugins/vim-tmux-focus-events'
+
 call plug#end()
 
 filetype plugin indent on
