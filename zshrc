@@ -85,10 +85,10 @@ alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 
 if [ -n "$SSH_CLIENT" ]; then
     local win_name="%n@%m: %~"
-    local prompt='[%m] %c'
+    local prompt='[%m] %1~'
 else
     local win_name="%~"
-    local prompt='%c'
+    local prompt='%1~'
 fi
 
 function precmd() {
