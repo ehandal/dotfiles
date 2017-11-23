@@ -116,4 +116,4 @@ let python_highlight_all = 1
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
 autocmd FileType arduino,c,cpp,cs setlocal commentstring=//%s
 autocmd FileType c,cpp,python setlocal foldmethod=indent
-autocmd FileType java setlocal noexpandtab
+autocmd FileType gitconfig,java setlocal noexpandtab
