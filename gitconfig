@@ -1,0 +1,8 @@
+[alias]
+    co = checkout
+    ci = commit
+    di = diff
+    st = status
+
+[include]
+    path = .gitconfig.local

@@ -2,6 +2,7 @@
 set -e
 cd ~
 ln -si config/bashrc .bashrc
+ln -si config/gitconfig .gitconfig
 ln -si config/gvimrc .gvimrc
 ln -si config/inputrc .inputrc
 ln -si config/tmux.conf .tmux.conf
