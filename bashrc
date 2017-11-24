@@ -40,9 +40,9 @@ fi
 set -o vi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+    source /etc/bash_completion
 fi
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [[ -f ~/.bashrc.local ]]; then
+    source ~/.bashrc.local
 fi
