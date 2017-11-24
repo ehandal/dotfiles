@@ -1,15 +1,14 @@
 #!/bin/bash
 set -e
-cd ~
-ln -si config/bashrc .bashrc
-ln -si config/gitconfig .gitconfig
-ln -si config/gvimrc .gvimrc
-ln -si config/inputrc .inputrc
-ln -si config/tmux.conf .tmux.conf
-ln -si config/vimperatorrc .vimperatorrc
-ln -si config/vimrc .vimrc
-ln -si config/zshrc .zshrc
-ln -siT config/vim .vim
+ln -sir bashrc ~/.bashrc
+ln -sir gitconfig ~/.gitconfig
+ln -sir gvimrc ~/.gvimrc
+ln -sir inputrc ~/.inputrc
+ln -sir tmux.conf ~/.tmux.conf
+ln -sir vimperatorrc ~/.vimperatorrc
+ln -sir vimrc ~/.vimrc
+ln -sir zshrc ~/.zshrc
+ln -sirT vim ~/.vim
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
