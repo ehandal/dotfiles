@@ -38,6 +38,7 @@ else
 fi
 
 set -o vi
+export EDITOR=vi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
