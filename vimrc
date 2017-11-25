@@ -12,7 +12,10 @@ Plug 'embear/vim-localvimrc'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'hdima/python-syntax'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -70,7 +73,7 @@ set nobackup
 set laststatus=2
 set ttimeoutlen=10
 set noshowmode
-let g:airline_extensions = ['tabline']
+let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#show_tab_type = 0
