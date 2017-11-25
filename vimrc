@@ -97,7 +97,6 @@ else
 endif
 
 let mapleader = "\<space>"
-nnoremap <silent> <leader>c :setlocal cursorline!<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
 
 nmap Y y$
