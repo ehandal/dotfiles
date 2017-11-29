@@ -84,7 +84,7 @@ let g:tmuxline_preset = {
       \'win'     : ['#I', '#W'],
       \'cwin'    : ['#I', '#W'],
       \'z'       : '#H',
-      \'options' :  {'status-justify' : 'left'}}
+      \'options' : {'status-justify' : 'left'}}
 
 if has('win32') || has('win64')
     colorscheme default
