@@ -21,8 +21,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/Colour-Sampler-Pack'
-Plug 'vim-scripts/camelcasemotion'
-Plug 'vimperator/vimperator.vim'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
