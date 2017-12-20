@@ -83,7 +83,7 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 alias ls='ls --color=tty'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 
-if [ -n "$SSH_CLIENT" ]; then
+if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
     local win_name="%n@%m: %~"
     local prompt='[%m] %1~'
 else
