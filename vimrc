@@ -95,7 +95,10 @@ else
 endif
 
 let mapleader = "\<space>"
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
+nnoremap <silent> <leader>t :Tags<CR>
 
 nmap Y y$
 nmap <Left>  :bp<CR>
