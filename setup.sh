@@ -9,7 +9,6 @@ ln -siT $BASE/gitconfig ~/.gitconfig
 ln -siT $BASE/gvimrc ~/.gvimrc
 ln -siT $BASE/inputrc ~/.inputrc
 ln -siT $BASE/tmux.conf ~/.tmux.conf
-ln -siT $BASE/vimperatorrc ~/.vimperatorrc
 ln -siT $BASE/vimrc ~/.vimrc
 ln -siT $BASE/zshrc ~/.zshrc
 ln -siT $BASE/vim ~/.vim
