@@ -48,13 +48,16 @@ set nostartofline
 set ruler
 set history=1000
 set showcmd
-set incsearch
-set hlsearch
 set mouse=a
 set mousemodel=popup
 set backspace=indent,eol,start
 set formatprg=par
 set visualbell t_vb=
+
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
 
 set tabstop=4
 set shiftwidth=4
