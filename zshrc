@@ -106,8 +106,12 @@ function precmd() {
     esac
 
     if [ -z "$STY" -a -z "$TMUX" ]; then
-        echo $DISPLAY > ~/.display
-    else
+        if [ -z "$DISPLAY" ]; then
+            rm -f ~/.display
+        else
+            echo $DISPLAY > ~/.display
+        fi
+    elif [ -e ~/.display ]; then
         export DISPLAY=`cat ~/.display`
     fi
 }
