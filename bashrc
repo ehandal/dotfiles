@@ -39,6 +39,7 @@ fi
 
 set -o vi
 export EDITOR=vi
+export GPG_TTY=$(tty)
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion

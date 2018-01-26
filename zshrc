@@ -140,6 +140,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export EDITOR=vi
+export GPG_TTY=`tty`
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
