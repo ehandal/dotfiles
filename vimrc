@@ -102,6 +102,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
 nnoremap <silent> <leader>t :Tags<CR>
+nnoremap <silent> <leader>w :update<CR>
 
 nmap Y y$
 nmap <Left>  :bp<CR>
