@@ -146,6 +146,20 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 export EDITOR=vi
 export GPG_TTY=`tty`
 
+if (( $+commands[fd] )); then
+    export FZF_DEFAULT_COMMAND='fd --no-ignore --no-ignore-vcs --type f --follow'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --no-ignore --no-ignore-vcs --type d --follow'
+
+    _fzf_compgen_path() {
+        fd --no-ignore --no-ignore-vcs --hidden --follow --exclude ".git" --exclude ".svn" . "$1"
+    }
+
+    _fzf_compgen_dir() {
+        fd --no-ignore --no-ignore-vcs --type d --hidden --follow --exclude ".git" --exclude ".svn" . "$1"
+    }
+fi
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
