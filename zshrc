@@ -113,6 +113,8 @@ function precmd() {
         fi
     elif [ -e ~/.display ]; then
         export DISPLAY=`cat ~/.display`
+    else
+        unset DISPLAY
     fi
 }
 
