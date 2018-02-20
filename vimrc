@@ -46,7 +46,7 @@ set wildmode=longest:full,full
 set nowrap
 set nostartofline
 set ruler
-set history=1000
+set history=10000
 set showcmd
 set mouse=a
 set mousemodel=popup
