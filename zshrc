@@ -15,32 +15,48 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
+typeset -A key
+key=(
+    BackSpace  "${terminfo[kbs]}"
+    Home       "${terminfo[khome]}"
+    End        "${terminfo[kend]}"
+    Insert     "${terminfo[kich1]}"
+    Delete     "${terminfo[kdch1]}"
+    Up         "${terminfo[kcuu1]}"
+    Down       "${terminfo[kcud1]}"
+    Left       "${terminfo[kcub1]}"
+    Right      "${terminfo[kcuf1]}"
+    PageUp     "${terminfo[kpp]}"
+    PageDown   "${terminfo[knp]}"
+    ShiftTab   "${terminfo[kcbt]}"
+)
+
 bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
-if [[ "${terminfo[kpp]}" != "" ]]; then
-  bindkey "${terminfo[kpp]}" up-line-or-history       # [PageUp] - Up a line of history
+if [[ "${key[PageUp]}" != "" ]]; then
+  bindkey "${key[PageUp]}" up-line-or-history         # [PageUp] - Up a line of history
 fi
-if [[ "${terminfo[knp]}" != "" ]]; then
-  bindkey "${terminfo[knp]}" down-line-or-history     # [PageDown] - Down a line of history
+if [[ "${key[PageDown]}" != "" ]]; then
+  bindkey "${key[PageDown]}" down-line-or-history     # [PageDown] - Down a line of history
 fi
 
 # start typing + [Up-Arrow] - fuzzy find history forward
-if [[ "${terminfo[kcuu1]}" != "" ]]; then
+if [[ "${key[Up]}" != "" ]]; then
   autoload -U up-line-or-beginning-search
   zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey "${key[Up]}" up-line-or-beginning-search
 fi
 # start typing + [Down-Arrow] - fuzzy find history backward
-if [[ "${terminfo[kcud1]}" != "" ]]; then
+if [[ "${key[Down]}" != "" ]]; then
   autoload -U down-line-or-beginning-search
   zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey "${key[Down]}" down-line-or-beginning-search
 fi
 
-if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+if [[ "${key[Home]}" != "" ]]; then
+  bindkey "${key[Home]}" beginning-of-line            # [Home] - Go to beginning of line
 fi
-if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+if [[ "${key[End]}" != "" ]]; then
+  bindkey "${key[End]}"  end-of-line                  # [End] - Go to end of line
 fi
 
 bindkey ' ' magic-space                               # [Space] - do history expansion
@@ -48,13 +64,13 @@ bindkey ' ' magic-space                               # [Space] - do history exp
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
-if [[ "${terminfo[kcbt]}" != "" ]]; then
-  bindkey "${terminfo[kcbt]}" reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
+if [[ "${key[ShiftTab]}" != "" ]]; then
+  bindkey "${key[ShiftTab]}" reverse-menu-complete    # [Shift-Tab] - move through the completion menu backwards
 fi
 
-bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
-if [[ "${terminfo[kdch1]}" != "" ]]; then
-  bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
+bindkey "${key[BackSpace]}" backward-delete-char      # [Backspace] - delete backward
+if [[ "${key[Delete]}" != "" ]]; then
+  bindkey "${key[Delete]}" delete-char                # [Delete] - delete forward
 else
   bindkey "^[[3~" delete-char
   bindkey "^[3;5~" delete-char
