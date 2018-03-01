@@ -9,7 +9,7 @@ endif
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
-Plug 'godlygeek/csapprox'
+" Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -92,7 +92,8 @@ if has('win32') || has('win64')
     set directory^=~/vimfiles/swap//
     set undodir=~/vimfiles/undo
 else
-    colorscheme asu1dark
+    set background=dark
+    colorscheme base16-tomorrow-night
     set directory^=~/.vim/swap//
     set undodir=~/.vim/undo
 endif
