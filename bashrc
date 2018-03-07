@@ -15,10 +15,10 @@ HISTFILESIZE=10000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-STARTCOLOR="\[\e[1;32m\]";
+STARTCOLOR="\[\e[32m\]";
 ENDCOLOR="\[\e[m\]";
-if [ -n "$SSH_CLIENT" ]; then
-    PS1="$STARTCOLOR[\h] \W\$$ENDCOLOR "
+if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
+    PS1="$STARTCOLOR[\h] \W \$$ENDCOLOR "
     case "$TERM" in
     xterm*|rxvt*)
         PS1="\[\e]0;\w [\h]\a\]$PS1"
@@ -27,7 +27,7 @@ if [ -n "$SSH_CLIENT" ]; then
         ;;
     esac
 else
-    PS1="$STARTCOLOR\W\$$ENDCOLOR "
+    PS1="$STARTCOLOR\W \$$ENDCOLOR "
     case "$TERM" in
     xterm*|rxvt*)
         PS1="\[\e]0;\w\a\]$PS1"
