@@ -98,6 +98,7 @@ autoload -U colors && colors
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 alias ls='ls --color=tty'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
+alias rg='rg --no-heading'
 
 if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
     local win_name="%n@%m: %~"
