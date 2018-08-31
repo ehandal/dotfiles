@@ -38,7 +38,6 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
-set number
 set hidden
 set virtualedit=block
 set wildmenu
