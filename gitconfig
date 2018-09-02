@@ -1,9 +1,11 @@
 [alias]
-	br = branch
+	b = branch
+	c = commit
 	co = checkout
-	ci = commit
-	di = diff
-	st = status
+	d = diff
+	ds = diff --staged
+	l = log --oneline
+	s = status --short --branch
 
 [include]
 	path = .gitconfig.local
