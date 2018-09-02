@@ -115,6 +115,7 @@ let c_space_errors = 1
 let python_highlight_all = 1
 
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
+autocmd BufRead,BufNewFile gitconfig setfiletype gitconfig
 autocmd FileType arduino,c,cpp,cs,cuda setlocal commentstring=//%s
 autocmd FileType c,cpp,python setlocal foldmethod=indent
 autocmd FileType gitconfig,java setlocal noexpandtab
