@@ -31,7 +31,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'w0ng/vim-hybrid'
 
-
 call plug#end()
 
 filetype plugin indent on
