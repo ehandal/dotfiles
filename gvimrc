@@ -4,7 +4,7 @@ if has('win32') || has('win64')
 elseif has('mac')
     set guifont=Menlo:h12
 else
-    set guifont=Ubuntu\ Mono\ 11
+    set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12,Ubuntu\ Mono\ 11
 endif
 
 set background=dark
