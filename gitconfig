@@ -6,6 +6,7 @@
 	ds = diff --staged
 	l = log --oneline
 	s = status --short --branch
+	up = pull --rebase
 
 [include]
 	path = .gitconfig.local
