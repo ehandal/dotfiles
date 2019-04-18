@@ -96,7 +96,7 @@ HISTFILE=~/.zsh_history
 
 autoload -U colors && colors
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
-alias ls='ls --color=tty'
+alias ls='ls --color=auto'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 alias rg='rg --no-heading'
 
