@@ -9,7 +9,6 @@ endif
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
-" Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -29,7 +28,6 @@ Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'w0ng/vim-hybrid'
 
 call plug#end()
