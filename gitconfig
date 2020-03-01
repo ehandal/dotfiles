@@ -7,17 +7,13 @@
 	l = log --oneline
 	s = status --short --branch
 	up = pull --rebase
-
 [include]
 	path = .gitconfig.local
-
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
-
 [push]
 	default = simple
-
 [url "git@github.com:"]
 	pushInsteadOf = git://github.com/
 	pushInsteadOf = https://github.com/
