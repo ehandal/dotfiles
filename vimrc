@@ -1,5 +1,3 @@
-set nocompatible
-
 if has('win32') || has('win64')
     call plug#begin('~/vimfiles/plugged')
 else
