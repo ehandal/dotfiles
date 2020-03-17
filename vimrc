@@ -20,8 +20,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 
 " colorschemes
-Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
