@@ -122,16 +122,8 @@ function precmd() {
             ;;
     esac
 
-    if [ -z "$STY" -a -z "$TMUX" ]; then
-        if [ -z "$DISPLAY" ]; then
-            rm -f ~/.display
-        else
-            echo $DISPLAY > ~/.display
-        fi
-    elif [ -e ~/.display ]; then
-        export DISPLAY=`cat ~/.display`
-    else
-        unset DISPLAY
+    if [ -n "$TMUX" ]; then
+        eval "$(tmux show-environment -s DISPLAY)"
     fi
 }
 
