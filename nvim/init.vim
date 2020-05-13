@@ -20,6 +20,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
+set noshowmode
 let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -34,10 +35,10 @@ let g:tmuxline_preset = {
       \'options' :  {'status-justify' : 'left'}}
 
 set hidden
+set virtualedit=block
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set noshowmode
 set mouse=a
 set undofile
 set nowrap
