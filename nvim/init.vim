@@ -36,6 +36,7 @@ let g:tmuxline_preset = {
 
 set hidden
 set virtualedit=block
+set wildmode=longest:full,full
 set tabstop=4
 set shiftwidth=4
 set expandtab
