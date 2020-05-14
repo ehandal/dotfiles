@@ -44,6 +44,9 @@ set mouse=a
 set undofile
 set nowrap
 
+set ignorecase
+set smartcase
+
 nmap Y y$
 nmap <Left>  :bp<CR>
 nmap <Right> :bn<CR>
