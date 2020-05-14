@@ -11,6 +11,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-python/python-syntax'
 
 " colorschemes
 Plug 'chriskempson/base16-vim'
@@ -60,6 +61,8 @@ nnoremap <silent> <leader>w :update<CR>
 
 " :help last-position-jump
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+let g:python_highlight_all = 1
 
 set termguicolors
 set background=dark
