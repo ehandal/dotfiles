@@ -8,7 +8,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'embear/vim-localvimrc'
 Plug 'godlygeek/tabular'
-Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
@@ -18,6 +17,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-python/python-syntax'
 
 " colorschemes
 Plug 'chriskempson/base16-vim'
@@ -107,7 +107,7 @@ nmap <Right> :bn<CR>
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 let c_space_errors = 1
-let python_highlight_all = 1
+let g:python_highlight_all = 1
 
 autocmd BufRead,BufNewFile *.vx setfiletype verilog
 autocmd BufRead,BufNewFile gitconfig setfiletype gitconfig
