@@ -53,6 +53,7 @@ nmap <Left>  :bp<CR>
 nmap <Right> :bn<CR>
 
 let mapleader = "\<space>"
+noremap <Space> <Nop>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
