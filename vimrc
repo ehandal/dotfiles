@@ -92,13 +92,13 @@ else
     set undodir=~/.vim/undo
 endif
 
-let mapleader = "\<space>"
+let mapleader = "\<Space>"
 noremap <Space> <Nop>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>n :nohlsearch<CR>
-nnoremap <silent> <leader>t :Tags<CR>
-nnoremap <silent> <leader>w :update<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>n :nohlsearch<CR>
+nnoremap <silent> <Leader>t :Tags<CR>
+nnoremap <silent> <Leader>w :update<CR>
 
 nmap Y y$
 nmap <Left>  :bp<CR>
