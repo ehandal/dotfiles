@@ -13,7 +13,7 @@ bindkey '^e' end-of-line
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd 'v' edit-command-line
+bindkey -M vicmd v edit-command-line
 
 typeset -A key
 key=(
