@@ -101,8 +101,8 @@ nnoremap <silent> <Leader>t :Tags<CR>
 nnoremap <silent> <Leader>w :update<CR>
 
 nmap Y y$
-nmap <Left>  :bp<CR>
-nmap <Right> :bn<CR>
+nmap <C-p> :bp<CR>
+nmap <C-n> :bn<CR>
 
 " :help last-position-jump
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
