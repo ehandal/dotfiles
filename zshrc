@@ -72,8 +72,6 @@ function precmd() {
         screen*|tmux*)
             print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
             ;;
-        *)
-            ;;
     esac
 
     if [ -n "$TMUX" ]; then
