@@ -43,6 +43,8 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 
+setopt interactivecomments
+
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=10000
 SAVEHIST=10000
