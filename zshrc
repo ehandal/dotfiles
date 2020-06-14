@@ -14,7 +14,7 @@ bindkey '^?' backward-delete-char
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+bindkey -a '^V' edit-command-line
 
 bindkey '^R' history-incremental-search-backward
 if [[ "${terminfo[kpp]}" != "" ]]; then
