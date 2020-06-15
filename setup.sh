@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-cd $(dirname $BASH_SOURCE)
-BASE=$(pwd)
+BASE=$(realpath --relative-to="$HOME" "$(dirname $BASH_SOURCE)")
 
 ln -siT $BASE/bashrc ~/.bashrc
 ln -siT $BASE/gitconfig ~/.gitconfig
