@@ -49,8 +49,8 @@ set ignorecase
 set smartcase
 
 nmap Y y$
-nmap <Left>  :bp<CR>
-nmap <Right> :bn<CR>
+nmap <C-p> :bp<CR>
+nmap <C-n> :bn<CR>
 
 let mapleader = "\<space>"
 noremap <Space> <Nop>
