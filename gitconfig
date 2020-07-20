@@ -4,8 +4,10 @@
 	co = checkout
 	d = diff
 	ds = diff --staged
+	f = fetch
 	l = log --oneline
 	s = status --short --branch
+	st = status
 	up = pull --rebase
 	ups = pull --rebase --autostash
 [include]
