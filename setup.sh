@@ -5,10 +5,8 @@ BASE=$(realpath --relative-to="$HOME" "$(dirname $BASH_SOURCE)")
 
 ln -siT $BASE/bashrc ~/.bashrc
 ln -siT $BASE/gitconfig ~/.gitconfig
-ln -siT $BASE/gvimrc ~/.gvimrc
 ln -siT $BASE/inputrc ~/.inputrc
 ln -siT $BASE/tmux.conf ~/.tmux.conf
-ln -siT $BASE/vimrc ~/.vimrc
 ln -siT $BASE/zshrc ~/.zshrc
 ln -siT $BASE/vim ~/.vim
 
