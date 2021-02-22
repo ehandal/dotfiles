@@ -11,7 +11,7 @@
 	up = pull --rebase
 	ups = pull --rebase --autostash
 [include]
-	path = .gitconfig.local
+	path = ~/.config/git/config.local
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
