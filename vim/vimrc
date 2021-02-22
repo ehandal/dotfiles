@@ -82,11 +82,13 @@ let g:tmuxline_preset = {
       \'options' : {'status-justify' : 'left'}}
 
 if has('win32') || has('win64')
+    let g:netrw_home = $LOCALAPPDATA . '\vim'
     let swap_dir = $LOCALAPPDATA . '\vim\swap'
     let &undodir = $LOCALAPPDATA . '\vim\undo'
     let &viminfofile = $LOCALAPPDATA . '\vim\viminfo'
     colorscheme default
 else
+    let g:netrw_home = $HOME . '/.local/share/vim'
     let swap_dir = $HOME . '/.local/share/vim/swap'
     set undodir=~/.local/share/vim/undo
     set viminfofile=~/.local/share/vim/viminfo

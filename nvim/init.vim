@@ -63,6 +63,7 @@ nnoremap <silent> <leader>w :update<CR>
 " :help last-position-jump
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+let g:netrw_home = stdpath('data')
 let g:python_highlight_all = 1
 
 set termguicolors
