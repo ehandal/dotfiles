@@ -1,8 +1,10 @@
 if has('win32') || has('win64')
-    call plug#begin($LOCALAPPDATA . '\vim\plugged')
+    let data_dir = $LOCALAPPDATA . '\vim'
 else
-    call plug#begin('~/.local/share/vim/plugged')
+    let data_dir = $HOME . '/.local/share/vim'
 endif
+
+call plug#begin(data_dir . '/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
@@ -81,23 +83,12 @@ let g:tmuxline_preset = {
       \'z'       : '#H',
       \'options' : {'status-justify' : 'left'}}
 
-if has('win32') || has('win64')
-    let g:netrw_home = $LOCALAPPDATA . '\vim'
-    let swap_dir = $LOCALAPPDATA . '\vim\swap'
-    let &undodir = $LOCALAPPDATA . '\vim\undo'
-    let &viminfofile = $LOCALAPPDATA . '\vim\viminfo'
-    colorscheme default
-else
-    let g:netrw_home = $HOME . '/.local/share/vim'
-    let swap_dir = $HOME . '/.local/share/vim/swap'
-    set undodir=~/.local/share/vim/undo
-    set viminfofile=~/.local/share/vim/viminfo
-    set background=dark
-    colorscheme base16-tomorrow-night
-endif
-
-let &directory = swap_dir . '//,' . &directory
-call mkdir(swap_dir, 'p')
+let g:netrw_home = data_dir
+let s:swap_dir = data_dir . '/swap'
+let &undodir = data_dir . '/undo'
+let &viminfofile = data_dir . '/viminfo'
+let &directory = s:swap_dir . '//,' . &directory
+call mkdir(s:swap_dir, 'p')
 call mkdir(&undodir, 'p')
 
 let mapleader = "\<Space>"
@@ -123,6 +114,13 @@ autocmd BufRead,BufNewFile gitconfig setfiletype gitconfig
 autocmd FileType arduino,c,cpp,cs,cuda setlocal commentstring=//%s
 autocmd FileType c,cpp,python setlocal foldmethod=indent
 autocmd FileType gitconfig,java setlocal noexpandtab
+
+if has('win32') || has('win64')
+    colorscheme default
+else
+    set background=dark
+    colorscheme base16-tomorrow-night
+endif
 
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
