@@ -1,4 +1,5 @@
-if has('win32') || has('win64')
+let s:is_windows = has('win32') || has('win64')
+if s:is_windows
     let data_dir = $LOCALAPPDATA . '\vim-data'
 else
     let data_dir = $HOME . '/.local/share/vim'
@@ -115,7 +116,7 @@ autocmd FileType arduino,c,cpp,cs,cuda setlocal commentstring=//%s
 autocmd FileType c,cpp,python setlocal foldmethod=indent
 autocmd FileType gitconfig,java setlocal noexpandtab
 
-if has('win32') || has('win64')
+if s:is_windows
     colorscheme default
 else
     set background=dark
