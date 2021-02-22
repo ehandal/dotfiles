@@ -1,7 +1,7 @@
 if has('win32') || has('win64')
-    call plug#begin('~/vimfiles/plugged')
+    call plug#begin($LOCALAPPDATA . '\vim\plugged')
 else
-    call plug#begin('~/.vim/plugged')
+    call plug#begin('~/.local/share/vim/plugged')
 endif
 
 Plug 'christoomey/vim-tmux-navigator'
