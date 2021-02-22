@@ -45,10 +45,10 @@ setopt inc_append_history
 
 setopt interactivecomments
 
-# Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
+mkdir -p ~/.local/share/zsh
+HISTFILE=~/.local/share/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.zsh_history
 
 autoload -U colors && colors
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -85,8 +85,13 @@ local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
 PROMPT="%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} "
 
 # Use modern completion system
-autoload -Uz compinit && compinit
+mkdir -p ~/.cache/zsh/zcompcache
 zmodload -i zsh/complist
+autoload -Uz compinit
+compinit -d ~/.cache/zsh/zcompdump
+
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path ~/.cache/zsh/zcompcache
 
 unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol
@@ -94,11 +99,8 @@ setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
 
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache
-
 zstyle ':completion:*:*:*:*:*' menu select
-test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+test -r ~/.config/dircolors && eval "$(dircolors -b ~/.config/dircolors)" || eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -125,8 +127,8 @@ if (( $+commands[fd] )); then
     }
 fi
 
-if [[ -f ~/.zshrc.local ]]; then
-    source ~/.zshrc.local
+if [[ -f ~/.config/zsh/zshrc.local ]]; then
+    source ~/.config/zsh/zshrc.local
 fi
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
