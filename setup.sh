@@ -14,6 +14,6 @@ ln -siT $BASE/bashrc ~/.bashrc
 ln -siT $BASE/vim ~/.vim
 
 if [ ! -d ~/.config/tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 fi
-~/.config/tmux/plugins/tpm/bin/install_plugins
+~/.local/share/tmux/plugins/tpm/bin/install_plugins
