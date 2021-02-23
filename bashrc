@@ -8,6 +8,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+mkdir -p ~/.local/share
+HISTFILE=~/.local/share/bash_history
 HISTSIZE=10000
 HISTFILESIZE=10000
 
