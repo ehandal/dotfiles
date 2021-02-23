@@ -4,14 +4,16 @@ set -e
 BASE=$(realpath --relative-to="$HOME" "$(dirname $BASH_SOURCE)")
 
 mkdir -p ~/.config/{git,tmux,zsh}
-ln -siT ../../$BASE/gitconfig ~/.config/git/config
-ln -si ../../$BASE/inputrc ~/.config
+ln -si ../$BASE/inputrc ~/.config
+ln -si ../$BASE/npmrc ~/.config
+ln -si ../../$BASE/gitconfig ~/.config/git/config
 ln -si ../../$BASE/tmux.conf ~/.config/tmux
 ln -si ../../$BASE/zshrc ~/.config/zsh
-ln -siT ../../$BASE/zshrc ~/.config/zsh/.zshrc
+ln -si ../../$BASE/zshrc ~/.config/zsh/.zshrc
 
-ln -siT $BASE/bashrc ~/.bashrc
-ln -siT $BASE/vim ~/.vim
+ln -si $BASE/bashrc ~/.bashrc
+ln -si $BASE/vim ~/.vim
+ln -si $BASE/zshenv ~/.zshenv
 
 if [ ! -d ~/.config/tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
