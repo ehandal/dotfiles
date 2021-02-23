@@ -3,7 +3,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': './install --all --xdg' }
+Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': 'ZDOTDIR=$HOME/.config/zsh ./install --all --xdg' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
