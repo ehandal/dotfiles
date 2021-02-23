@@ -14,7 +14,8 @@ Plug 'godlygeek/tabular'
 if s:is_windows
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --xdg' }
+    Plug 'junegunn/fzf', { 'do': './install --all --xdg' }
+    Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': './install --all --xdg' }
 endif
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
