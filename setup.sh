@@ -16,7 +16,7 @@ ln -si $BASE/bashrc ~/.bashrc
 ln -si $BASE/zshenv ~/.zshenv
 ln -siT $BASE/vim ~/.vim
 
-if [ ! -d ~/.config/tmux/plugins/tpm ]; then
+if [ ! -d ~/.local/share/tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 fi
 ~/.local/share/tmux/plugins/tpm/bin/install_plugins
