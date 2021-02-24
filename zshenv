@@ -1,10 +1,10 @@
 ZDOTDIR=$HOME/.config/zsh
 skip_global_compinit=1 # prevents /etc/zsh/zshrc from calling compinit
 
-mkdir -p $HOME/.local/share/less
+mkdir -p $HOME/.local/share
 export INPUTRC=$HOME/.config/inputrc
 export IPYTHONDIR=$HOME/.config/ipython
-export LESSHISTFILE=$HOME/.local/share/less/history
+export LESSHISTFILE=$HOME/.local/share/lesshst
 export NODE_REPL_HISTORY=$HOME/.local/share/node_repl_history
 export NPM_CONFIG_USERCONFIG=$HOME/.config/npmrc
 export P4ENVIRO=$HOME/.config/p4enviro
