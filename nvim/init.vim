@@ -80,7 +80,11 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 nmap <Leader>d <Plug>(coc-definition)
 nmap <Leader>y <Plug>(coc-type-definition)
@@ -88,17 +92,16 @@ nmap <Leader>i <Plug>(coc-implementation)
 nmap <Leader>r <Plug>(coc-references)
 nmap <Leader>e <Plug>(coc-rename)
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
@@ -108,7 +111,7 @@ augroup mygroup
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    autocmd FileType c,cpp,python setlocal signcolumn=number number
+    autocmd FileType c,cpp,python setlocal signcolumn=yes number
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s
 augroup end
