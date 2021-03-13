@@ -9,7 +9,6 @@ ln -si ../$BASE/npmrc ~/.config
 ln -si ../$BASE/nvim ~/.config
 ln -si ../../$BASE/gitconfig ~/.config/git/config
 ln -si ../../$BASE/tmux.conf ~/.config/tmux
-ln -si ../../$BASE/zshrc ~/.config/zsh
 ln -si ../../$BASE/zshrc ~/.config/zsh/.zshrc
 
 ln -si $BASE/bashrc ~/.bashrc
