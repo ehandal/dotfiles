@@ -66,6 +66,7 @@ nnoremap <silent> <leader>w :update<CR>
 set updatetime=300
 set cmdheight=2
 set shortmess+=c
+let g:coc_global_extensions = ['coc-json', 'coc-pyright']
 
 " coc.nvim mappings
 inoremap <silent><expr> <TAB>
