@@ -39,6 +39,16 @@ Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
+" use data dir
+let g:netrw_home = s:data_dir
+let s:swap_dir = s:data_dir . '/swap'
+let &undodir = s:data_dir . '/undo'
+let &viminfofile = s:data_dir . '/viminfo'
+let &directory = s:swap_dir . '//,' . &directory
+call mkdir(s:swap_dir, 'p')
+call mkdir(&undodir, 'p')
+
+" general settings
 filetype plugin indent on
 syntax enable
 
@@ -74,30 +84,10 @@ set foldopen-=block
 set undofile
 set nobackup
 
-set laststatus=2
-set ttimeoutlen=10
-set noshowmode
-let g:airline_extensions = ['branch', 'coc', 'tabline']
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#show_tab_type = 0
+let c_space_errors = 1
+let g:python_highlight_all = 1
 
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_preset = {
-      \'a'       : '#S',
-      \'win'     : ['#I', '#W'],
-      \'cwin'    : ['#I', '#W'],
-      \'z'       : '#H',
-      \'options' : {'status-justify' : 'left'}}
-
-let g:netrw_home = s:data_dir
-let s:swap_dir = s:data_dir . '/swap'
-let &undodir = s:data_dir . '/undo'
-let &viminfofile = s:data_dir . '/viminfo'
-let &directory = s:swap_dir . '//,' . &directory
-call mkdir(s:swap_dir, 'p')
-call mkdir(&undodir, 'p')
-
+" general mappings
 let mapleader = "\<Space>"
 noremap <Space> <Nop>
 nnoremap <silent> <Leader>b :Buffers<CR>
@@ -110,7 +100,25 @@ nmap Y y$
 nmap <C-p> :bp<CR>
 nmap <C-n> :bn<CR>
 
-" coc.nvim related settings
+" airline settings
+set laststatus=2
+set ttimeoutlen=10
+set noshowmode
+let g:airline_extensions = ['branch', 'coc', 'tabline']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_tab_type = 0
+
+" tmuxline settings
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = {
+      \'a'       : '#S',
+      \'win'     : ['#I', '#W'],
+      \'cwin'    : ['#I', '#W'],
+      \'z'       : '#H',
+      \'options' : {'status-justify' : 'left'}}
+
+" coc.nvim settings
 set updatetime=300
 set cmdheight=2
 set shortmess+=c
@@ -165,12 +173,6 @@ augroup coc
     autocmd FileType jsonc setlocal commentstring=//%s
 augroup END
 
-" :help last-position-jump
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-let c_space_errors = 1
-let g:python_highlight_all = 1
-
 augroup misc
     autocmd!
     autocmd BufRead,BufNewFile *.vx setfiletype verilog
@@ -178,6 +180,8 @@ augroup misc
     autocmd FileType arduino,c,cpp,cs,cuda setlocal commentstring=//%s
     autocmd FileType c,cpp,python setlocal foldmethod=indent
     autocmd FileType gitconfig,java setlocal noexpandtab
+
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " :help last-position-jump
 augroup END
 
 if s:is_windows

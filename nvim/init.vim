@@ -23,20 +23,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
-set noshowmode
-let g:airline_extensions = ['branch', 'coc', 'tabline']
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#show_tab_type = 0
+" use data dir
+let g:netrw_home = stdpath('data')
 
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_preset = {
-      \'a'       : '#S',
-      \'win'     : ['#I', '#W'],
-      \'cwin'    : ['#I', '#W'],
-      \'z'       : '#H',
-      \'options' :  {'status-justify' : 'left'}}
-
+" general settings
 set hidden
 set virtualedit=block
 set wildmode=longest:full,full
@@ -50,10 +40,9 @@ set nowrap
 set ignorecase
 set smartcase
 
-nmap Y y$
-nmap <C-p> :bp<CR>
-nmap <C-n> :bn<CR>
+let g:python_highlight_all = 1
 
+" general mappings
 let mapleader = "\<space>"
 noremap <Space> <Nop>
 nnoremap <silent> <leader>b :Buffers<CR>
@@ -62,7 +51,27 @@ nnoremap <silent> <leader>n :nohlsearch<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>w :update<CR>
 
-" coc.nvim related settings
+nmap Y y$
+nmap <C-p> :bp<CR>
+nmap <C-n> :bn<CR>
+
+" airline settings
+set noshowmode
+let g:airline_extensions = ['branch', 'coc', 'tabline']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_tab_type = 0
+
+" tmuxline settings
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = {
+      \'a'       : '#S',
+      \'win'     : ['#I', '#W'],
+      \'cwin'    : ['#I', '#W'],
+      \'z'       : '#H',
+      \'options' :  {'status-justify' : 'left'}}
+
+" coc.nvim settings
 set updatetime=300
 set cmdheight=2
 set shortmess+=c
@@ -117,11 +126,10 @@ augroup coc
     autocmd FileType jsonc setlocal commentstring=//%s
 augroup END
 
-" :help last-position-jump
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-let g:netrw_home = stdpath('data')
-let g:python_highlight_all = 1
+augroup misc
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " :help last-position-jump
+augroup END
 
 set termguicolors
 set background=dark
