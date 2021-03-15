@@ -106,7 +106,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-augroup mygroup
+augroup coc
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -115,7 +115,7 @@ augroup mygroup
     autocmd FileType c,cpp,python setlocal signcolumn=yes number
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s
-augroup end
+augroup END
 
 " :help last-position-jump
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
