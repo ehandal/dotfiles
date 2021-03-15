@@ -121,6 +121,7 @@ augroup coc
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
     autocmd FileType c,cpp,python setlocal signcolumn=yes number
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s

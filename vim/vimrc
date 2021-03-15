@@ -44,6 +44,7 @@ let g:netrw_home = s:data_dir
 let s:swap_dir = s:data_dir . '/swap'
 let &undodir = s:data_dir . '/undo'
 let &viminfofile = s:data_dir . '/viminfo'
+set directory&vim " reset to default
 let &directory = s:swap_dir . '//,' . &directory
 call mkdir(s:swap_dir, 'p')
 call mkdir(&undodir, 'p')
@@ -168,6 +169,7 @@ augroup coc
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
     autocmd FileType c,cpp,python setlocal signcolumn=number number
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s
