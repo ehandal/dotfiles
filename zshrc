@@ -127,8 +127,16 @@ if (( $+commands[fd] )); then
     }
 fi
 
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+
 if [[ -f ~/.config/zsh/zshrc.local ]]; then
     source ~/.config/zsh/zshrc.local
+fi
+
+if (( $+commands[pyenv] )); then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
