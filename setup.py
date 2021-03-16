@@ -157,29 +157,29 @@ if system == 'Linux' and distro == 'Ubuntu':
                 subprocess.run(['make', f'-j{usable_cpus}'], cwd=tmp_dir, check=True)
                 subprocess.run(['sudo', 'make', 'install'], cwd=tmp_dir, check=True)
 
-        # pyenv
-        if shutil.which('pyenv') is None:
-            pyenv_root = Path(data_dir / 'pyenv')
-            env = os.environ.copy()
-            env['PYENV_ROOT'] = str(pyenv_root)
+    # pyenv
+    if shutil.which('pyenv') is None:
+        pyenv_root = Path(data_dir / 'pyenv')
+        env = os.environ.copy()
+        env['PYENV_ROOT'] = str(pyenv_root)
 
-            # install pyenv
-            with urllib.request.urlopen('https://pyenv.run') as req:
-                subprocess.run(['bash', '-'], input=req.read(), env=env, check=True)
+        # install pyenv
+        with urllib.request.urlopen('https://pyenv.run') as req:
+            subprocess.run(['bash', '-'], input=req.read(), env=env, check=True)
 
-            # install latest Python 3
-            pyenv_bin = pyenv_root / 'bin/pyenv'
-            pyenv_list = subprocess.check_output([str(pyenv_bin), 'install', '--list'], env=env, text=True)
-            latest_version = (3, 0, 0)
-            for line in pyenv_list.splitlines():
-                if not (m := re.fullmatch(r'\s*3\.(\d+)\.(\d+)', line)):
-                    continue
-                minor, patchlevel = m.groups()
-                version = (3, int(minor), int(patchlevel))
-                if latest_version < version:
-                    latest_version = version
-            assert latest_version != (3, 0, 0)
-            subprocess.run([str(pyenv_bin), 'install', '.'.join(str(i) for i in latest_version)], env=env, check=True)
+        # install latest Python 3
+        pyenv_bin = pyenv_root / 'bin/pyenv'
+        pyenv_list = subprocess.check_output([str(pyenv_bin), 'install', '--list'], env=env, text=True)
+        latest_version = (3, 0, 0)
+        for line in pyenv_list.splitlines():
+            if not (m := re.fullmatch(r'\s*3\.(\d+)\.(\d+)', line)):
+                continue
+            minor, patchlevel = m.groups()
+            version = (3, int(minor), int(patchlevel))
+            if latest_version < version:
+                latest_version = version
+        assert latest_version != (3, 0, 0)
+        subprocess.run([str(pyenv_bin), 'install', '.'.join(str(i) for i in latest_version)], env=env, check=True)
 
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
