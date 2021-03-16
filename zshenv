@@ -1,21 +1,21 @@
-ZDOTDIR=$HOME/.config/zsh
+ZDOTDIR=~/.config/zsh
 skip_global_compinit=1 # prevents /etc/zsh/zshrc from calling compinit
 
-mkdir -p "$HOME"/.local/share
-export INPUTRC=$HOME/.config/inputrc
-export IPYTHONDIR=$HOME/.config/ipython
-export LESSHISTFILE=$HOME/.local/share/lesshst
-export NODE_REPL_HISTORY=$HOME/.local/share/node_repl_history
-export NPM_CONFIG_USERCONFIG=$HOME/.config/npmrc
-export P4ENVIRO=$HOME/.config/p4enviro
-export P4TICKETS=$HOME/.local/share/p4tickets
-export PYLINTHOME=$HOME/.cache/pylint
+mkdir -p ~/.local/share
+export INPUTRC=~/.config/inputrc
+export IPYTHONDIR=~/.config/ipython
+export LESSHISTFILE=~/.local/share/lesshst
+export NODE_REPL_HISTORY=~/.local/share/node_repl_history
+export NPM_CONFIG_USERCONFIG=~/.config/npmrc
+export P4ENVIRO=~/.config/p4enviro
+export P4TICKETS=~/.local/share/p4tickets
+export PYLINTHOME=~/.cache/pylint
 
 # set PATH so it includes user's private bin directories
 typeset -U PATH path
 path=(
-    $HOME/bin
-    $HOME/.local/bin
+    ~/bin
+    ~/.local/bin
     $path)
 export PATH
 
