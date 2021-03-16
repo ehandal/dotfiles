@@ -18,3 +18,7 @@ path=(
     $HOME/.local/bin
     $path)
 export PATH
+
+if [[ -f ~/.config/zsh/zshenv.local ]]; then
+    source ~/.config/zsh/zshenv.local
+fi
