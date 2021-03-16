@@ -51,8 +51,13 @@ for file, p in symlinks:
     target = Path(os.path.relpath(dotfile_dir / file, path.parent))
     if path.is_symlink() and target == Path(os.readlink(path)):
         continue
-    print(f'symlink {path.relative_to(Path.home())} to {target}')
+    rel_path = path.relative_to(Path.home())
+    print(f'symlink {rel_path} to {target}')
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        if input(f'Replace {rel_path}? ') != 'y':
+            continue
+        path.unlink()
     path.symlink_to(target)
 
 def get_github_release(repo: str, name_re: str, file: str):
@@ -149,13 +154,14 @@ if system == 'Linux' and distro == 'Ubuntu':
         if release_path.suffix == '.deb':
             subprocess.run(['sudo', 'dpkg', '-i', release_path], check=True)
         else:
-            assert name == 'tmux' and release_path.suffixes == ['.tar', '.gz']
+            assert name == 'tmux' and release_path.suffixes[-2:] == ['.tar', '.gz']
             with tempfile.TemporaryDirectory() as tmp_dir:
+                tmux_src_dir = Path(tmp_dir) / f'tmux-{version}'
                 usable_cpus = len(os.sched_getaffinity(0))
                 shutil.unpack_archive(release_path, tmp_dir)
-                subprocess.run(['./configure', '--enable-utempter'], cwd=tmp_dir, check=True)
-                subprocess.run(['make', f'-j{usable_cpus}'], cwd=tmp_dir, check=True)
-                subprocess.run(['sudo', 'make', 'install'], cwd=tmp_dir, check=True)
+                subprocess.run(['./configure', '--enable-utempter'], cwd=tmux_src_dir, check=True)
+                subprocess.run(['make', f'-j{usable_cpus}'], cwd=tmux_src_dir, check=True)
+                subprocess.run(['sudo', 'make', 'install'], cwd=tmux_src_dir, check=True)
 
     # pyenv
     if shutil.which('pyenv') is None:
