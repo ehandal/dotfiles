@@ -93,7 +93,7 @@ if system == 'Linux' and distro == 'Ubuntu':
     packages = {
         # general
         'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'neovim', 'nodejs',
-        'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'zsh',
+        'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape', 'zsh',
 
         # tmux build
         'libevent-dev', 'libncurses-dev', 'libutempter-dev',
