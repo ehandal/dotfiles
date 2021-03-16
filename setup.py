@@ -83,7 +83,7 @@ if system == 'Linux' and distro == 'Ubuntu':
     # nodejs
     if 'nodesource' not in apt_cache_policy:
         with urllib.request.urlopen('https://deb.nodesource.com/setup_lts.x') as req:
-            subprocess.run(['sudo', '-E', 'bash', '-'], stdin=req, check=True)
+            subprocess.run(['sudo', '-E', 'bash', '-'], input=req.read(), check=True)
 
     # install apt packages
     packages = {
@@ -165,7 +165,7 @@ if system == 'Linux' and distro == 'Ubuntu':
 
             # install pyenv
             with urllib.request.urlopen('https://pyenv.run') as req:
-                subprocess.run(['bash', '-'], stdin=req, env=env, check=True)
+                subprocess.run(['bash', '-'], input=req.read(), env=env, check=True)
 
             # install latest Python 3
             pyenv_bin = pyenv_root / 'bin/pyenv'
