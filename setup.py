@@ -184,7 +184,9 @@ if system == 'Linux' and distro == 'Ubuntu':
             if latest_version < version:
                 latest_version = version
         assert latest_version != (3, 0, 0)
-        subprocess.run([str(pyenv_bin), 'install', '.'.join(str(i) for i in latest_version)], env=env, check=True)
+        latest_version_str = '.'.join(str(i) for i in latest_version)
+        subprocess.run([str(pyenv_bin), 'install', latest_version_str], env=env, check=True)
+        subprocess.run([str(pyenv_bin), 'global', latest_version_str], env=env, check=True)
 
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
