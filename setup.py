@@ -99,11 +99,9 @@ if system == 'Linux' and distro == 'Ubuntu':
         'libevent-dev', 'libncurses-dev', 'libutempter-dev',
 
         # python build
-        # https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites
-        'curl', 'gcc', 'git', 'libbz2-dev', 'libffi-dev', 'liblzma-dev',
-        'libncurses5-dev', 'libncursesw5-dev', 'libreadline-dev',
-        'libsqlite3-dev', 'libssl-dev', 'llvm', 'make', 'python-openssl',
-        'tk-dev', 'wget', 'xz-utils', 'zlib1g-dev',
+        'libbz2-dev', 'libffi-dev', 'libgdbm-dev', 'liblzma-dev',
+        'libncurses-dev', 'libreadline-dev', 'libsqlite3-dev', 'libssl-dev',
+        'uuid-dev', 'zlib1g-dev',
     }
     subprocess.run(['sudo', 'apt', 'install'] + sorted(packages), check=True)
 
@@ -185,7 +183,9 @@ if system == 'Linux' and distro == 'Ubuntu':
                 latest_version = version
         assert latest_version != (3, 0, 0)
         latest_version_str = '.'.join(str(i) for i in latest_version)
-        subprocess.run([str(pyenv_bin), 'install', latest_version_str], env=env, check=True)
+        install_env = env.copy()
+        install_env['CONFIGURE_OPTS'] = '--enable-optimizations'
+        subprocess.run([str(pyenv_bin), 'install', latest_version_str], env=install_env, check=True)
         subprocess.run([str(pyenv_bin), 'global', latest_version_str], env=env, check=True)
 
 # tmux
