@@ -172,7 +172,7 @@ if system == 'Linux' and distro == 'Ubuntu':
 
         # install latest Python 3
         pyenv_bin = pyenv_root / 'bin/pyenv'
-        pyenv_list = subprocess.check_output([str(pyenv_bin), 'install', '--list'], env=env, text=True)
+        pyenv_list = subprocess.check_output([pyenv_bin, 'install', '--list'], env=env, text=True)
         latest_version = (3, 0, 0)
         for line in pyenv_list.splitlines():
             if not (m := re.fullmatch(r'\s*3\.(\d+)\.(\d+)', line)):
@@ -185,8 +185,8 @@ if system == 'Linux' and distro == 'Ubuntu':
         latest_version_str = '.'.join(str(i) for i in latest_version)
         install_env = env.copy()
         install_env['CONFIGURE_OPTS'] = '--enable-optimizations'
-        subprocess.run([str(pyenv_bin), 'install', latest_version_str], env=install_env, check=True)
-        subprocess.run([str(pyenv_bin), 'global', latest_version_str], env=env, check=True)
+        subprocess.run([pyenv_bin, 'install', latest_version_str], env=install_env, check=True)
+        subprocess.run([pyenv_bin, 'global', latest_version_str], env=env, check=True)
 
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
