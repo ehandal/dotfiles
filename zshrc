@@ -134,9 +134,8 @@ fi
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
-if [[ -f ~/.config/zsh/zshrc.local ]]; then
-    source ~/.config/zsh/zshrc.local
-fi
+[[ -f ~/.local/share/base16-fzf/bash/base16-tomorrow-night.config ]] && source ~/.local/share/base16-fzf/bash/base16-tomorrow-night.config
+[[ -f ~/.config/zsh/zshrc.local ]] && source ~/.config/zsh/zshrc.local
 
 if (( $+commands[pyenv] )); then
     eval "$(pyenv init -)"
