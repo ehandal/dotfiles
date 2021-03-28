@@ -196,10 +196,10 @@ else
 endif
 
 set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let &t_8f = "\e[38;2;%lu;%lu;%lum"
+let &t_8b = "\e[48;2;%lu;%lu;%lum"
 if $TERM =~# '^\(mintty\|tmux\|vte\)\(-.*\)\?$'
-    let &t_8u = "\<Esc>[58:2::%lu:%lu:%lum"
+    let &t_8u = "\e[58:2::%lu:%lu:%lum"
     let &t_Cs = "\e[4:3m"
     let &t_Ce = "\e[4:0m"
     let &t_Ts = "\e[9m"
@@ -207,9 +207,9 @@ if $TERM =~# '^\(mintty\|tmux\|vte\)\(-.*\)\?$'
 elseif &t_Ce == ""
     set t_Cs= " undercurl needs t_Ce, so unset t_Cs to allow underline fallback
 endif
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
+let &t_SI = "\e[6 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[2 q"
 if $TERM =~# '^mintty\(-.*\)\?$'
     set ttymouse=sgr
 endif
