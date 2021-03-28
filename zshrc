@@ -115,6 +115,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export EDITOR=vi
 export GPG_TTY=`tty`
+export BAT_THEME=base16
 
 if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --no-ignore --follow'
