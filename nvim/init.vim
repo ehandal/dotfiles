@@ -125,6 +125,11 @@ augroup coc
     autocmd FileType c,cpp,python setlocal signcolumn=yes number
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s
+
+    autocmd ColorScheme * highlight CocErrorHighlight cterm=undercurl gui=undercurl guisp=Red
+                      \ | highlight CocWarningHighlight cterm=undercurl gui=undercurl guisp=Brown
+                      \ | highlight CocInfoHighlight cterm=undercurl gui=undercurl guisp=Yellow
+                      \ | highlight CocHintHighlight cterm=underline gui=underline guisp=#404040
 augroup END
 
 augroup misc
