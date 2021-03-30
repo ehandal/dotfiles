@@ -26,10 +26,13 @@ fi
 if [[ "${terminfo[kcbt]}" != "" ]]; then
   bindkey "${terminfo[kcbt]}" reverse-menu-complete # Shift-Tab
 fi
-
+if [[ "${terminfo[kRIT5]}" != "" ]]; then
+  bindkey "${terminfo[kRIT5]}" forward-word  # Ctrl-RightArrow
+fi
+if [[ "${terminfo[kLFT5]}" != "" ]]; then
+  bindkey "${terminfo[kLFT5]}" backward-word # Ctrl-LeftArrow
+fi
 bindkey ' ' magic-space # do history expansion
-bindkey '^[[1;5C' forward-word  # Ctrl-RightArrow
-bindkey '^[[1;5D' backward-word # Ctrl-LeftArrow
 
 setopt auto_cd
 setopt auto_pushd
