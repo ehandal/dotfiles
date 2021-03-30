@@ -32,6 +32,8 @@ TERM kterm
 TERM linux
 TERM linux-c
 TERM mach-color
+TERM mintty
+TERM mintty-direct
 TERM mlterm
 TERM putty
 TERM putty-256color
@@ -46,7 +48,11 @@ TERM screen-w
 TERM screen.linux
 TERM tmux
 TERM tmux-256color
+TERM tmux-direct
 TERM vt100
+TERM vte
+TERM vte-256color
+TERM vte-direct
 TERM xterm
 TERM xterm-256color
 TERM xterm-color
