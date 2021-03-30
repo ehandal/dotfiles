@@ -52,8 +52,8 @@ nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>w :update<CR>
 
 nmap Y y$
-nmap <C-p> :bp<CR>
-nmap <C-n> :bn<CR>
+nmap <silent> <C-p> :bp<CR>
+nmap <silent> <C-n> :bn<CR>
 
 " airline settings
 set noshowmode
@@ -96,11 +96,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <Leader>d <Plug>(coc-definition)
-nmap <Leader>y <Plug>(coc-type-definition)
-nmap <Leader>i <Plug>(coc-implementation)
-nmap <Leader>r <Plug>(coc-references)
-nmap <Leader>e <Plug>(coc-rename)
+nmap <silent> Leader>d <Plug>(coc-definition)
+nmap <silent> Leader>y <Plug>(coc-type-definition)
+nmap <silent> Leader>i <Plug>(coc-implementation)
+nmap <silent> Leader>r <Plug>(coc-references)
+nmap <silent> Leader>e <Plug>(coc-rename)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>

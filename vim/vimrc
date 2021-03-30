@@ -100,8 +100,8 @@ nnoremap <silent> <Leader>t :Tags<CR>
 nnoremap <silent> <Leader>w :update<CR>
 
 nmap Y y$
-nmap <C-p> :bp<CR>
-nmap <C-n> :bn<CR>
+nmap <silent> <C-p> :bp<CR>
+nmap <silent> <C-n> :bn<CR>
 
 " airline settings
 set laststatus=2
@@ -143,11 +143,11 @@ inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nmap <Leader>d <Plug>(coc-definition)
-nmap <Leader>y <Plug>(coc-type-definition)
-nmap <Leader>i <Plug>(coc-implementation)
-nmap <Leader>r <Plug>(coc-references)
-nmap <Leader>e <Plug>(coc-rename)
+nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>y <Plug>(coc-type-definition)
+nmap <silent> <Leader>i <Plug>(coc-implementation)
+nmap <silent> <Leader>r <Plug>(coc-references)
+nmap <silent> <Leader>rn <Plug>(coc-rename)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
