@@ -55,8 +55,9 @@ symlinks = (
     ('nvim', f'{config_dir}/'),
     ('tmux.conf', f'{config_dir}/tmux/'),
     ('vim', '.vim'),
-    ('zshenv', '.zshenv'),
-    ('zshrc', f'{config_dir}/zsh/.zshrc'),
+    ('zsh', f'{config_dir}/'),
+
+    (f'{config_dir}/zsh/.zshenv', '.zshenv'),
 )
 
 for file, p in symlinks:
