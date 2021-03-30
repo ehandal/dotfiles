@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import gzip
 import json
 import os
 import platform
@@ -187,6 +188,21 @@ if system == 'Linux' and distro == 'Ubuntu':
         install_env['CONFIGURE_OPTS'] = '--enable-optimizations'
         subprocess.run([pyenv_bin, 'install', latest_version_str], env=install_env, check=True)
         subprocess.run([pyenv_bin, 'global', latest_version_str], env=env, check=True)
+
+if system == 'Linux' and shutil.which('infocmp'):
+    terms = {'mintty-direct', 'tmux-256color', 'tmux-direct', 'vte-direct'}
+    def has_terminfo(term):
+        return subprocess.run(['infocmp', term], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+    missing_terms = [term for term in sorted(terms) if not has_terminfo(term)]
+    if missing_terms:
+        with urllib.request.urlopen('http://invisible-island.net/datafiles/current/terminfo.src.gz') as req:
+            with tempfile.NamedTemporaryFile('wb') as fw:
+                with gzip.open(req) as fr:
+                    shutil.copyfileobj(fr, fw)
+                fw.flush()
+                print('Adding missing terminfo:', *missing_terms)
+                subprocess.run(['tic', '-x', '-e', ','.join(missing_terms), fw.name])
+        assert all(has_terminfo(term) for term in missing_terms)
 
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
