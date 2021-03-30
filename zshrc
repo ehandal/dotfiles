@@ -17,19 +17,19 @@ zle -N edit-command-line
 bindkey -a '^V' edit-command-line
 
 bindkey '^R' history-incremental-search-backward
-if [[ "${terminfo[kpp]}" != "" ]]; then
+if [[ -n "${terminfo[kpp]}" ]]; then
     bindkey "${terminfo[kpp]}" up-line-or-history     # PageUp
 fi
-if [[ "${terminfo[knp]}" != "" ]]; then
+if [[ -n "${terminfo[knp]}" ]]; then
     bindkey "${terminfo[knp]}" down-line-or-history   # PageDown
 fi
-if [[ "${terminfo[kcbt]}" != "" ]]; then
+if [[ -n "${terminfo[kcbt]}" ]]; then
     bindkey "${terminfo[kcbt]}" reverse-menu-complete # Shift-Tab
 fi
-if [[ "${terminfo[kRIT5]}" != "" ]]; then
+if [[ -n "${terminfo[kRIT5]}" ]]; then
     bindkey "${terminfo[kRIT5]}" forward-word  # Ctrl-RightArrow
 fi
-if [[ "${terminfo[kLFT5]}" != "" ]]; then
+if [[ -n "${terminfo[kLFT5]}" ]]; then
     bindkey "${terminfo[kLFT5]}" backward-word # Ctrl-LeftArrow
 fi
 bindkey ' ' magic-space # do history expansion
