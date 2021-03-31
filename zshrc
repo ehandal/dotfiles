@@ -70,11 +70,11 @@ fi
 function precmd() {
     local tab_name="%15<..<%~%<<" #15 char left truncated PWD
     case "$TERM" in
-        cygwin|xterm*|putty*|rxvt*|ansi)
+        mintty*|vte*|xterm*)
             print -Pn "\e]2;$win_name:q\a" # set window name
             print -Pn "\e]1;$tab_name:q\a" # set tab name
             ;;
-        screen*|tmux*)
+        tmux*)
             print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
             ;;
     esac
