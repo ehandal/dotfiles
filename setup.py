@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import gzip
 import json
 import os
@@ -26,6 +27,10 @@ def get_github_release(repo: str, name_re: str, file: str):
             assert isinstance(download_url, str), download_url
             return version, download_url, file
     sys.exit('ERROR: no release found for github repo {repo}')
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--skip-apt', action='store_true', help='skip Ubuntu apt commands')
+args = parser.parse_args()
 
 dotfile_dir = Path(__file__).parent
 config_dir = Path.home() / '.config'
@@ -79,33 +84,34 @@ for file, p in symlinks:
     path.symlink_to(target)
 
 if system == 'Linux' and distro == 'Ubuntu':
-    apt_cache_policy = subprocess.check_output(['apt-cache', 'policy'], text=True)
+    if not args.skip_apt:
+        apt_cache_policy = subprocess.check_output(['apt-cache', 'policy'], text=True)
 
-    # PPAs
-    for ppa in ['jonathonf/vim', 'neovim-ppa/stable']:
-        if ppa not in apt_cache_policy:
-            subprocess.run(['sudo', 'add-apt-repository', f'ppa:{ppa}'], check=True)
+        # PPAs
+        for ppa in ['jonathonf/vim', 'neovim-ppa/stable']:
+            if ppa not in apt_cache_policy:
+                subprocess.run(['sudo', 'add-apt-repository', f'ppa:{ppa}'], check=True)
 
-    # nodejs
-    if 'nodesource' not in apt_cache_policy:
-        with urllib.request.urlopen('https://deb.nodesource.com/setup_lts.x') as req:
-            subprocess.run(['sudo', '-E', 'bash', '-'], input=req.read(), check=True)
+        # nodejs
+        if 'nodesource' not in apt_cache_policy:
+            with urllib.request.urlopen('https://deb.nodesource.com/setup_lts.x') as req:
+                subprocess.run(['sudo', '-E', 'bash', '-'], input=req.read(), check=True)
 
-    # install apt packages
-    packages = {
-        # general
-        'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'neovim', 'nodejs',
-        'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape', 'zsh',
+        # install apt packages
+        packages = {
+            # general
+            'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'neovim', 'nodejs',
+            'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape', 'zsh',
 
-        # tmux build
-        'libevent-dev', 'libncurses-dev', 'libutempter-dev',
+            # tmux build
+            'libevent-dev', 'libncurses-dev', 'libutempter-dev',
 
-        # python build
-        'libbz2-dev', 'libffi-dev', 'libgdbm-dev', 'liblzma-dev',
-        'libncurses-dev', 'libreadline-dev', 'libsqlite3-dev', 'libssl-dev',
-        'uuid-dev', 'zlib1g-dev',
-    }
-    subprocess.run(['sudo', 'apt', 'install'] + sorted(packages), check=True)
+            # python build
+            'libbz2-dev', 'libffi-dev', 'libgdbm-dev', 'liblzma-dev',
+            'libncurses-dev', 'libreadline-dev', 'libsqlite3-dev', 'libssl-dev',
+            'uuid-dev', 'zlib1g-dev',
+        }
+        subprocess.run(['sudo', 'apt', 'install'] + sorted(packages), check=True)
 
     semver_re = r'(\d+\.\d+\.\d+)'
     github_releases = (
