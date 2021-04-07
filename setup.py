@@ -165,16 +165,15 @@ if system == 'Linux' and distro == 'Ubuntu':
     # pyenv
     if shutil.which('pyenv') is None:
         pyenv_root = Path(data_dir / 'pyenv')
-        env = os.environ.copy()
-        env['PYENV_ROOT'] = str(pyenv_root)
+        pyenv_env = dict(os.environ, PYENV_ROOT=pyenv_root)
 
         # install pyenv
         with urllib.request.urlopen('https://pyenv.run') as req:
-            subprocess.run(['bash', '-'], input=req.read(), env=env, check=True)
+            subprocess.run(['bash', '-'], input=req.read(), env=pyenv_env, check=True)
 
         # install latest Python 3
         pyenv_bin = pyenv_root / 'bin/pyenv'
-        pyenv_list = subprocess.check_output([pyenv_bin, 'install', '--list'], env=env, text=True)
+        pyenv_list = subprocess.check_output([pyenv_bin, 'install', '--list'], env=pyenv_env, text=True)
         latest_version = (3, 0, 0)
         for line in pyenv_list.splitlines():
             if not (m := re.fullmatch(r'\s*3\.(\d+)\.(\d+)', line)):
@@ -185,10 +184,9 @@ if system == 'Linux' and distro == 'Ubuntu':
                 latest_version = version
         assert latest_version != (3, 0, 0)
         latest_version_str = '.'.join(str(i) for i in latest_version)
-        install_env = env.copy()
-        install_env['CONFIGURE_OPTS'] = '--enable-optimizations'
+        install_env = dict(pyenv_env, CONFIGURE_OPTS='--enable-optimizations')
         subprocess.run([pyenv_bin, 'install', latest_version_str], env=install_env, check=True)
-        subprocess.run([pyenv_bin, 'global', latest_version_str], env=env, check=True)
+        subprocess.run([pyenv_bin, 'global', latest_version_str], env=pyenv_env, check=True)
 
 if system == 'Linux' and shutil.which('infocmp'):
     terms = {'mintty-direct', 'tmux-256color', 'tmux-direct', 'vte-direct'}
@@ -208,7 +206,7 @@ if system == 'Linux' and shutil.which('infocmp'):
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
     subprocess.run(['git', 'clone', 'https://github.com/tmux-plugins/tpm', tpm_dir], check=True)
-    subprocess.run(str(tpm_dir / 'bin/install_plugins'), check=True)
+    subprocess.run(tpm_dir / 'bin/install_plugins', check=True)
 
 # (neo)vim
 if not (nvim_plug := data_dir / 'nvim/site/autoload/plug.vim').exists():
@@ -216,7 +214,8 @@ if not (nvim_plug := data_dir / 'nvim/site/autoload/plug.vim').exists():
     with urllib.request.urlopen('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') as req:
         with nvim_plug.open('wb') as f:
             shutil.copyfileobj(req, f)
+vim_env = dict(os.environ, ZDOTDIR=config_dir / 'zsh') # it's possible zshenv isn't sourced yet
 if not (data_dir / 'vim/plugged').exists():
-    subprocess.run(['vim', '+PlugInstall', '+qall'], check=True)
+    subprocess.run(['vim', '+PlugInstall', '+qall'], env=vim_env, check=True)
 if not (data_dir / 'nvim/plugged').exists():
-    subprocess.run(['nvim', '+PlugInstall', '+qall'], check=True)
+    subprocess.run(['nvim', '+PlugInstall', '+qall'], env=vim_env, check=True)
