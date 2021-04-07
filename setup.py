@@ -158,9 +158,10 @@ if system == 'Linux' and distro == 'Ubuntu':
                 tmux_src_dir = Path(tmp_dir) / f'tmux-{version}'
                 usable_cpus = len(os.sched_getaffinity(0))
                 shutil.unpack_archive(release_path, tmp_dir)
-                subprocess.run(['./configure', '--enable-utempter'], cwd=tmux_src_dir, check=True)
+                tmux_prefix = Path.home() / '.local'
+                subprocess.run(['./configure', f'--prefix={tmux_prefix}', '--enable-utempter'], cwd=tmux_src_dir, check=True)
                 subprocess.run(['make', f'-j{usable_cpus}'], cwd=tmux_src_dir, check=True)
-                subprocess.run(['sudo', 'make', 'install'], cwd=tmux_src_dir, check=True)
+                subprocess.run(['make', 'install'], cwd=tmux_src_dir, check=True)
 
     # pyenv
     if shutil.which('pyenv') is None:
