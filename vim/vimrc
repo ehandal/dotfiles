@@ -210,12 +210,6 @@ augroup misc
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " :help last-position-jump
 augroup END
 
-if s:is_windows
-    colorscheme default
-else
-    set background=dark
-    colorscheme base16-tomorrow-night
-endif
 
 set termguicolors
 let &t_8f = "\e[38;2;%lu;%lu;%lum"
@@ -234,6 +228,13 @@ let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
 if $TERM =~# '^mintty\(-.*\)\?$'
     set ttymouse=sgr
+endif
+
+if s:is_windows
+    colorscheme default
+else
+    set background=dark
+    colorscheme base16-tomorrow-night
 endif
 
 if filereadable(s:vimrc_local)
