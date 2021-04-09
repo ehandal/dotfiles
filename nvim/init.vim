@@ -115,6 +115,26 @@ function! s:show_documentation()
   endif
 endfunction
 
+function! s:set_coc_highlights()
+    let l:guibg = synIDattr(synIDtrans(hlID("SignColumn")), "bg", "gui")
+    let l:ctermbg = synIDattr(synIDtrans(hlID("SignColumn")), "bg", "cterm")
+    let l:bg_str = ''
+    if !empty(l:guibg)
+        let l:bg_str .= ' guibg=' . l:guibg
+    endif
+    if !empty(l:ctermbg)
+        let l:bg_str .= ' ctermbg=' . l:ctermbg
+    endif
+    execute 'highlight CocErrorSign ctermfg=Red guifg=#ff0000' . l:bg_str
+    execute 'highlight CocWarningSign ctermfg=Brown guifg=#ff922b' . l:bg_str
+    execute 'highlight CocInfoSign ctermfg=Yellow guifg=#fab005' . l:bg_str
+    execute 'highlight CocHintSign ctermfg=Blue guifg=#15aabf' . l:bg_str
+    highlight CocErrorHighlight cterm=undercurl gui=undercurl guisp=Red
+    highlight CocWarningHighlight cterm=undercurl gui=undercurl guisp=Brown
+    highlight CocInfoHighlight cterm=undercurl gui=undercurl guisp=Yellow
+    highlight CocHintHighlight cterm=underline gui=underline guisp=#404040
+endfunction
+
 augroup coc
     autocmd!
     " Setup formatexpr specified filetype(s).
@@ -126,10 +146,7 @@ augroup coc
     autocmd FileType python let b:coc_root_patterns = ['__pycache__']
     autocmd FileType jsonc setlocal commentstring=//%s
 
-    autocmd ColorScheme * highlight CocErrorHighlight cterm=undercurl gui=undercurl guisp=Red
-                      \ | highlight CocWarningHighlight cterm=undercurl gui=undercurl guisp=Brown
-                      \ | highlight CocInfoHighlight cterm=undercurl gui=undercurl guisp=Yellow
-                      \ | highlight CocHintHighlight cterm=underline gui=underline guisp=#404040
+    autocmd ColorScheme * call s:set_coc_highlights()
 augroup END
 
 augroup misc
