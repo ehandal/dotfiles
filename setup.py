@@ -171,7 +171,7 @@ if system == 'Linux' and distro == 'Ubuntu':
 
     # pyenv
     if shutil.which('pyenv') is None:
-        pyenv_root = Path(data_dir / 'pyenv')
+        pyenv_root = data_dir / 'pyenv'
         pyenv_env = dict(os.environ, PYENV_ROOT=pyenv_root)
 
         # install pyenv
