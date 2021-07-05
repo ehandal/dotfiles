@@ -96,11 +96,12 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <silent> Leader>d <Plug>(coc-definition)
-nmap <silent> Leader>y <Plug>(coc-type-definition)
-nmap <silent> Leader>i <Plug>(coc-implementation)
-nmap <silent> Leader>r <Plug>(coc-references)
-nmap <silent> Leader>e <Plug>(coc-rename)
+nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>y <Plug>(coc-type-definition)
+nmap <silent> <Leader>i <Plug>(coc-implementation)
+nmap <silent> <Leader>r <Plug>(coc-references)
+nmap <silent> <Leader>rn <Plug>(coc-rename)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-info)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
