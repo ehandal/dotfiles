@@ -1,9 +1,15 @@
+let s:is_mac = has('macunix')
+
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': './install --all --xdg' }
+if s:is_mac
+    Plug '/opt/homebrew/opt/fzf'
+else
+    Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': './install --all --xdg' }
+endif
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
