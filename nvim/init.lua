@@ -35,8 +35,9 @@ require('lazy').setup({
         options = {['status-justify'] = 'left'},
       }
     end,
+    cmd = 'Tmuxline',
   },
-  'godlygeek/tabular',
+  {'godlygeek/tabular', cmd = 'Tabularize'},
   {
     'junegunn/fzf',
     build = './install --all --xdg',
@@ -165,12 +166,11 @@ require('lazy').setup({
       vim.cmd.colorscheme 'base16-tomorrow-night'
     end,
   },
-  'ellisonleao/gruvbox.nvim',
+  {'ellisonleao/gruvbox.nvim', lazy = true},
 }, {ui = {border = 'single'}})
 
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {clear = true}),
-    desc = 'base16-tomorrow-night colorscheme adjustments',
     pattern = 'base16-tomorrow-night',
     callback = function()
         vim.api.nvim_set_hl(0, 'Identifier', {})   
