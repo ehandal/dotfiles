@@ -42,14 +42,6 @@ require('lazy').setup({
     'junegunn/fzf',
     build = './install --all --xdg',
   },
-  {
-    'junegunn/fzf.vim',
-    keys = {
-      {'<Leader>b', '<Cmd>Buffers<CR>'},
-      {'<Leader>f', '<Cmd>Files<CR>'},
-    },
-    cmd = 'Rg',
-  },
   'tpope/vim-commentary',
   'tpope/vim-fugitive',
   'tpope/vim-repeat',
@@ -156,6 +148,19 @@ require('lazy').setup({
       }
     end,
   },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {'nvim-lua/plenary.nvim'},
+    tag = '0.1.2',
+    config = function()
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<Leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<Leader>fg', builtin.live_grep, {})
+      vim.keymap.set('n', '<Leader>fb', builtin.buffers, {})
+      vim.keymap.set('n', '<Leader>fh', builtin.help_tags, {})
+    end,
+  },
+  {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
 
   -- colorschemes
   {
@@ -163,11 +168,14 @@ require('lazy').setup({
     lazy = false,
     priority = 1000,
     config = function()
+      require('base16-colorscheme').setup('tomorrow-night', {telescope_borders = true})
       vim.cmd.colorscheme 'base16-tomorrow-night'
     end,
   },
   {'ellisonleao/gruvbox.nvim', lazy = true},
 }, {ui = {border = 'single'}})
+
+require('telescope').load_extension('fzf')
 
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {clear = true}),
