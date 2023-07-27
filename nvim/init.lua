@@ -137,6 +137,11 @@ require('lazy').setup({
         highlight = {enable = true},
         indent = {enable = true},
       }
+      vim.o.foldenable = false
+      vim.o.foldmethod = 'expr'
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.opt.foldopen:remove('block')
+      vim.o.foldlevelstart = 99
     end,
   },
   {
