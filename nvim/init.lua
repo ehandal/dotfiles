@@ -126,15 +126,17 @@ require('lazy').setup({
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = {'c', 'cpp', 'lua', 'python', 'vim'},
-        sync_install = false,
-        highlight = {enable = true},
-        indent = {enable = true},
+        highlight = {
+          enable = true,
+          disable = function(lang, buf) -- disable on large files
+              local max_filesize = 100 * 1024 -- 100 KB
+              local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+              if ok and stats and stats.size > max_filesize then
+                  return true
+              end
+          end,
+        },
       }
-      vim.o.foldenable = false
-      vim.o.foldmethod = 'expr'
-      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-      vim.opt.foldopen:remove('block')
-      vim.o.foldlevelstart = 99
     end,
   },
   {
@@ -158,6 +160,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<Leader>fg', builtin.live_grep, {})
       vim.keymap.set('n', '<Leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<Leader>fh', builtin.help_tags, {})
+      require('telescope').setup {defaults = {preview = {treesitter = false}}} -- slow treesitter can cause huge previewer lag
     end,
   },
   {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
