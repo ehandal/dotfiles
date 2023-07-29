@@ -215,7 +215,7 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
     bufmap('n', 'gd', vim.lsp.buf.definition)
     bufmap('n', 'gD', vim.lsp.buf.declaration)
     bufmap('n', 'K', vim.lsp.buf.hover)
-    bufmap('n', '<C-k>', vim.lsp.buf.signature_help)
+    bufmap('n', '<Leader>k', vim.lsp.buf.signature_help)
     bufmap('n', '<Leader>i', vim.lsp.buf.implementation)
     bufmap('n', '<Leader>t', vim.lsp.buf.type_definition)
     bufmap('n', '<Leader>rn', vim.lsp.buf.rename)
