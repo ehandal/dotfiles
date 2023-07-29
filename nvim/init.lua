@@ -160,6 +160,7 @@ require('lazy').setup({
     config = function()
       require('telescope').load_extension('fzf')
       local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<Leader>fa', builtin.builtin)
       vim.keymap.set('n', '<Leader>ff', builtin.find_files)
       vim.keymap.set('n', '<Leader>fg', builtin.live_grep)
       vim.keymap.set('n', '<Leader>fb', builtin.buffers)
