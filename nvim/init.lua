@@ -152,18 +152,21 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = {'nvim-lua/plenary.nvim'},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
+    },
     tag = '0.1.2',
     config = function()
+      require('telescope').load_extension('fzf')
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<Leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<Leader>fg', builtin.live_grep, {})
-      vim.keymap.set('n', '<Leader>fb', builtin.buffers, {})
-      vim.keymap.set('n', '<Leader>fh', builtin.help_tags, {})
+      vim.keymap.set('n', '<Leader>ff', builtin.find_files)
+      vim.keymap.set('n', '<Leader>fg', builtin.live_grep)
+      vim.keymap.set('n', '<Leader>fb', builtin.buffers)
+      vim.keymap.set('n', '<Leader>fh', builtin.help_tags)
       require('telescope').setup {defaults = {preview = {treesitter = false}}} -- slow treesitter can cause huge previewer lag
     end,
   },
-  {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
 
   -- colorschemes
   {
@@ -178,8 +181,6 @@ require('lazy').setup({
   {'ellisonleao/gruvbox.nvim', lazy = true},
 }, {ui = {border = 'single'}})
 
-require('telescope').load_extension('fzf')
-
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {clear = true}),
     pattern = 'base16-tomorrow-night',
@@ -190,7 +191,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     end,
 })
 require('lspconfig.ui.windows').default_options.border = 'single'
-vim.diagnostic.config{float = {border = 'single'}}
+vim.diagnostic.config {float = {border = 'single'}}
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'single', title = 'hover'})
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single', title = 'signature'})
 
