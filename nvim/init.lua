@@ -168,6 +168,7 @@ require('lazy').setup({
       require('telescope').setup {defaults = {preview = {treesitter = false}}} -- slow treesitter can cause huge previewer lag
     end,
   },
+  {'nvim-tree/nvim-web-devicons', lazy = true},
 
   -- colorschemes
   {
