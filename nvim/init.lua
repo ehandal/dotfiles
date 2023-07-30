@@ -49,7 +49,7 @@ require('lazy').setup({
   'tpope/vim-unimpaired',
   {
     'vim-airline/vim-airline',
-    dependencies = {'vim-airline/vim-airline-themes'},
+    dependencies = 'vim-airline/vim-airline-themes',
     init = function()
       vim.o.showmode = false
       vim.g.airline_powerline_fonts = 1
@@ -141,7 +141,7 @@ require('lazy').setup({
   },
   {
     'williamboman/mason.nvim',
-    dependencies = {'williamboman/mason-lspconfig.nvim'},
+    dependencies = 'williamboman/mason-lspconfig.nvim',
     build = ':MasonUpdate', -- :MasonUpdate updates registry contents
     config = function()
       require('mason').setup {ui = {border = 'single'}}
