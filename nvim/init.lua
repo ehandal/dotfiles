@@ -178,7 +178,7 @@ require('lazy').setup({
 }, {ui = {border = 'single'}})
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-    group = vim.api.nvim_create_augroup('B16TomorrowNight', {clear = true}),
+    group = vim.api.nvim_create_augroup('B16TomorrowNight', {}),
     pattern = 'base16-tomorrow-night',
     callback = function()
         vim.api.nvim_set_hl(0, 'Identifier', {})
@@ -216,7 +216,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
 
-local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {clear = true})
+local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
   callback = function()
     local function bufmap(mode, lhs, rhs)
@@ -259,7 +259,7 @@ vim.keymap.set('n', '<Leader>w', '<Cmd>update<CR>', {silent = true})
 vim.keymap.set('n', '<C-p>', '<Cmd>bp<CR>', {silent = true})
 vim.keymap.set('n', '<C-n>', '<Cmd>bn<CR>', {silent = true})
 
-local misc_augroup = vim.api.nvim_create_augroup('misc', {clear = true})
+local misc_augroup = vim.api.nvim_create_augroup('misc', {})
 vim.api.nvim_create_autocmd('BufReadPost', {group = misc_augroup,
   callback = function()
     vim.cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] -- :help last-position-jump
