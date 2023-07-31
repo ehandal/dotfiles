@@ -56,7 +56,7 @@ require('lazy').setup({
     },
     config = function()
         local cmp = require 'cmp'
-        cmp.setup {
+        cmp.setup { ---@diagnostic disable-line: missing-fields
             snippet = {expand = function(args) require('luasnip').lsp_expand(args.body) end},
             window = {completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered()},
             mapping = cmp.mapping.preset.insert {
@@ -64,7 +64,7 @@ require('lazy').setup({
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm {select = true},
                 ['<Tab>'] = cmp.mapping(function(fallback)
-                  luasnip = require 'luasnip'
+                  local luasnip = require 'luasnip'
                   if cmp.visible() then
                     cmp.select_next_item()
                   -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -78,7 +78,7 @@ require('lazy').setup({
                   end
                 end, {'i', 's'}),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
-                  luasnip = require 'luasnip'
+                  local luasnip = require 'luasnip'
                   if cmp.visible() then
                     cmp.select_prev_item()
                   elseif luasnip.jumpable(-1) then
@@ -107,11 +107,11 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.configs').setup { ---@diagnostic disable-line: missing-fields
         ensure_installed = {'c', 'cpp', 'lua', 'python', 'vim'},
         highlight = {
           enable = true,
-          disable = function(lang, buf) -- disable on large files
+          disable = function(_, buf) -- disable on large files
               local max_filesize = 100 * 1024 -- 100 KB
               local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
               if ok and stats and stats.size > max_filesize then
@@ -234,8 +234,8 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
     bufmap('n', 'gr', vim.lsp.buf.references)
   end,
 })
-vim.api.nvim_create_autocmd('FileType', {group = lsp_cfg_augroup, pattern = {'c', 'cpp', 'python'},
-  callback = function(args)
+vim.api.nvim_create_autocmd('FileType', {group = lsp_cfg_augroup, pattern = {'c', 'cpp', 'lua', 'python'},
+  callback = function()
     vim.opt_local.number = true
     vim.opt_local.signcolumn = 'number'
   end,
@@ -259,7 +259,7 @@ vim.keymap.set('n', '<Leader>w', '<Cmd>update<CR>', {silent = true})
 vim.keymap.set('n', '<C-p>', '<Cmd>bp<CR>', {silent = true})
 vim.keymap.set('n', '<C-n>', '<Cmd>bn<CR>', {silent = true})
 
-misc_augroup = vim.api.nvim_create_augroup('misc', {clear = true})
+local misc_augroup = vim.api.nvim_create_augroup('misc', {clear = true})
 vim.api.nvim_create_autocmd('BufReadPost', {group = misc_augroup,
   callback = function()
     vim.cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] -- :help last-position-jump
