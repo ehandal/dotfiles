@@ -194,11 +194,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 require('neodev').setup {} -- needs to be before lspconfig
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-if true then
-  lspconfig.clangd.setup {capabilities = capabilities}
-else
-  lspconfig.ccls.setup {cache = {directory = '/tmp/ccls'}, capabilities = capabilities}
-end
+lspconfig.clangd.setup {capabilities = capabilities}
 lspconfig.pyright.setup {capabilities = capabilities}
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
