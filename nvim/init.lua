@@ -43,19 +43,6 @@ require('lazy').setup({
   'tpope/vim-repeat',
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
-  {
-    'vim-airline/vim-airline',
-    dependencies = 'vim-airline/vim-airline-themes',
-    init = function()
-      vim.o.showmode = false
-      vim.g.airline_powerline_fonts = 1
-      vim.g.airline_extensions = {'branch', 'nvimlsp', 'tabline'}
-      vim.g['airline#extensions#tabline#enabled'] = 1
-      vim.g['airline#extensions#tabline#formatter'] = 'unique_tail_improved'
-      vim.g['airline#extensions#tabline#show_tab_type'] = 0
-      vim.g['airline#extensions#nvimlsp#show_line_numbers'] = 0
-    end,
-  },
 
   'neovim/nvim-lspconfig',
   {
@@ -165,6 +152,16 @@ require('lazy').setup({
     end,
   },
   {'nvim-tree/nvim-web-devicons', lazy = true},
+  {
+    'nvim-lualine/lualine.nvim',
+    init = function() vim.o.showmode = false end,
+    opts = {
+      options = {theme = 'base16'},
+      sections = {lualine_c = {{'filename', path = 1}}}, -- show relative path
+      tabline = {lualine_a = {'buffers'}},
+      extensions = {'lazy', 'man', 'quickfix'},
+    },
+  },
 
   -- colorschemes
   {
