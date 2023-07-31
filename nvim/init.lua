@@ -129,7 +129,7 @@ require('lazy').setup({
     config = function()
       require('mason').setup {ui = {border = 'single'}}
       require('mason-lspconfig').setup {
-        ensure_installed = {'clangd', 'pyright'},
+        ensure_installed = {'clangd', 'lua_ls', 'pyright'},
       }
     end,
   },
@@ -162,6 +162,7 @@ require('lazy').setup({
       extensions = {'lazy', 'man', 'quickfix'},
     },
   },
+  'folke/neodev.nvim',
 
   -- colorschemes
   {
@@ -190,6 +191,7 @@ vim.diagnostic.config {float = {border = 'single'}}
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'single', title = 'hover'})
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single', title = 'signature'})
 
+require('neodev').setup {} -- needs to be before lspconfig
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 if true then
@@ -198,6 +200,16 @@ else
   lspconfig.ccls.setup {cache = {directory = '/tmp/ccls'}, capabilities = capabilities}
 end
 lspconfig.pyright.setup {capabilities = capabilities}
+lspconfig.lua_ls.setup {
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      completion = {callSnippet = 'Replace'},
+      telemetry = {enable = false},
+      workspace = {checkThirdParty = false},
+    },
+  },
+}
 
 vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
