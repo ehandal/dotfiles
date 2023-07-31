@@ -38,10 +38,6 @@ require('lazy').setup({
     cmd = 'Tmuxline',
   },
   {'godlygeek/tabular', cmd = 'Tabularize'},
-  {
-    'junegunn/fzf',
-    build = './install --all --xdg',
-  },
   'tpope/vim-commentary',
   'tpope/vim-fugitive',
   'tpope/vim-repeat',
