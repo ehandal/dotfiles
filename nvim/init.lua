@@ -84,7 +84,7 @@ require('lazy').setup({
                   luasnip = require 'luasnip'
                   if cmp.visible() then
                     cmp.select_next_item()
-                  -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
+                  -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
                   -- that way you will only jump inside the snippet region
                   elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
@@ -187,9 +187,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {clear = true}),
     pattern = 'base16-tomorrow-night',
     callback = function()
-        vim.api.nvim_set_hl(0, 'Identifier', {})   
-        vim.api.nvim_set_hl(0, 'TSVariable', {})   
-        vim.api.nvim_set_hl(0, 'TSError', {})   
+        vim.api.nvim_set_hl(0, 'Identifier', {})
+        vim.api.nvim_set_hl(0, 'TSVariable', {})
+        vim.api.nvim_set_hl(0, 'TSError', {})
     end,
 })
 require('lspconfig.ui.windows').default_options.border = 'single'
@@ -263,7 +263,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {group = misc_augroup,
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
   callback = function()
     vim.bo.tabstop = 2
-    vim.bo.shiftwidth = 2 
+    vim.bo.shiftwidth = 2
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'}, callback = function() vim.bo.commentstring = '//%s' end})
