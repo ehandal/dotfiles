@@ -51,6 +51,8 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-path',
+
+      {'L3MON4D3/LuaSnip', version = '2.*'},
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
@@ -97,10 +99,6 @@ require('lazy').setup({
             }),
         }
     end,
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    version = '2.*',
   },
   {
     'nvim-treesitter/nvim-treesitter',
