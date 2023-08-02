@@ -38,7 +38,6 @@ require('lazy').setup({
     cmd = 'Tmuxline',
   },
   {'godlygeek/tabular', cmd = 'Tabularize'},
-  'tpope/vim-commentary',
   'tpope/vim-fugitive',
   'tpope/vim-repeat',
   'tpope/vim-surround',
@@ -163,6 +162,7 @@ require('lazy').setup({
     },
   },
   'folke/neodev.nvim',
+  {'numToStr/Comment.nvim', opts = {}},
 
   -- colorschemes
   {
@@ -267,4 +267,3 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
     vim.bo.shiftwidth = 2
   end,
 })
-vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'}, callback = function() vim.bo.commentstring = '//%s' end})
