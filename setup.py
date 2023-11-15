@@ -131,7 +131,7 @@ if system == 'Linux' and distro == 'Ubuntu':
         version_opt = '-V' if name == 'tmux' else '--version'
         binary_name = 'rg' if name == 'ripgrep' else name
         try:
-            version_str = subprocess.check_output([binary_name, version_opt], text=True, stderr=subprocess.STDOUT) # XXX capturing stderr because of https://github.com/sharkdp/hexyl/issues/131
+            version_str = subprocess.check_output([binary_name, version_opt], text=True)
         except FileNotFoundError:
             installed_version = None
         else:
