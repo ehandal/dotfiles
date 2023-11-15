@@ -88,7 +88,7 @@ if system == 'Linux' and distro == 'Ubuntu':
         apt_cache_policy = subprocess.check_output(['apt-cache', 'policy'], text=True)
 
         # PPAs
-        for ppa in ['jonathonf/vim', 'neovim-ppa/stable']:
+        for ppa in ['jonathonf/vim']:
             if ppa not in apt_cache_policy:
                 subprocess.run(['sudo', 'add-apt-repository', f'ppa:{ppa}'], check=True)
 
@@ -100,7 +100,7 @@ if system == 'Linux' and distro == 'Ubuntu':
         # install apt packages
         packages = {
             # general
-            'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'neovim', 'nodejs',
+            'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'nodejs',
             'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape', 'zsh',
 
             # tmux build
