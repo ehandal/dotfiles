@@ -215,14 +215,7 @@ if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
     subprocess.run(['git', 'clone', 'https://github.com/tmux-plugins/tpm', tpm_dir], check=True)
     subprocess.run(tpm_dir / 'bin/install_plugins', check=True)
 
-# (neo)vim
-if not (nvim_plug := data_dir / 'nvim/site/autoload/plug.vim').exists():
-    nvim_plug.parent.mkdir(parents=True)
-    with urllib.request.urlopen('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') as req:
-        with nvim_plug.open('wb') as f:
-            shutil.copyfileobj(req, f)
+# vim
 vim_env = dict(os.environ, ZDOTDIR=config_dir / 'zsh') # it's possible zshenv isn't sourced yet
 if not (data_dir / 'vim/plugged').exists():
     subprocess.run(['vim', '+PlugInstall', '+qall'], env=vim_env, check=True)
-if not (data_dir / 'nvim/plugged').exists():
-    subprocess.run(['nvim', '+PlugInstall', '+qall'], env=vim_env, check=True)
