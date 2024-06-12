@@ -226,9 +226,9 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
 })
 vim.api.nvim_create_autocmd('FileType', {group = lsp_cfg_augroup, pattern = {'c', 'cpp', 'lua', 'python'},
   callback = function()
-    vim.opt_local.number = true
-    vim.opt_local.relativenumber = true
-    vim.opt_local.signcolumn = 'number'
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+    vim.wo.signcolumn = 'number'
   end,
 })
 
