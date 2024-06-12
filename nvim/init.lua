@@ -21,6 +21,12 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+local function base16_mods()
+  vim.api.nvim_set_hl(0, 'Identifier', {})
+  vim.api.nvim_set_hl(0, 'TSVariable', {})
+  vim.api.nvim_set_hl(0, 'TSError', {})
+end
+
 require('lazy').setup({
   'christoomey/vim-tmux-navigator',
   {
@@ -169,6 +175,7 @@ require('lazy').setup({
     config = function()
       require('base16-colorscheme').setup('tomorrow-night', {telescope_borders = true})
       vim.cmd.colorscheme 'base16-tomorrow-night'
+      base16_mods()
     end,
   },
   {'ellisonleao/gruvbox.nvim', lazy = true},
@@ -176,12 +183,8 @@ require('lazy').setup({
 
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {}),
-    pattern = 'base16-tomorrow-night',
-    callback = function()
-        vim.api.nvim_set_hl(0, 'Identifier', {})
-        vim.api.nvim_set_hl(0, 'TSVariable', {})
-        vim.api.nvim_set_hl(0, 'TSError', {})
-    end,
+    pattern = 'base16-*',
+    callback = base16_mods,
 })
 require('lspconfig.ui.windows').default_options.border = 'single'
 vim.diagnostic.config {float = {border = 'single'}}
