@@ -224,13 +224,6 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
     bufmap('n', 'gr', vim.lsp.buf.references)
   end,
 })
-vim.api.nvim_create_autocmd('FileType', {group = lsp_cfg_augroup, pattern = {'c', 'cpp', 'lua', 'python'},
-  callback = function()
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    vim.wo.signcolumn = 'number'
-  end,
-})
 
 -- general settings
 vim.o.virtualedit = 'block'
@@ -264,4 +257,11 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
 })
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'},
   callback = function() vim.bo.commentstring = '// %s' end,
+})
+vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp', 'lua', 'python'},
+  callback = function()
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+    vim.wo.signcolumn = 'number'
+  end,
 })
