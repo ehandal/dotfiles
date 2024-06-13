@@ -235,6 +235,8 @@ vim.o.undofile = true
 vim.o.wrap = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.list = true
+vim.opt.listchars = {tab = '» ', trail = '·', nbsp = '␣'}
 
 vim.o.background = 'dark'
 vim.o.termguicolors = true
