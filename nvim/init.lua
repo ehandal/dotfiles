@@ -58,7 +58,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-path',
 
-      {'L3MON4D3/LuaSnip', version = '2.*'},
+      {'L3MON4D3/LuaSnip', version = '2.*', build = 'make install_jsregexp'},
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
