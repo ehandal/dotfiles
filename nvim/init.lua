@@ -132,7 +132,7 @@ require('lazy').setup({
     config = function()
       require('mason').setup {ui = {border = 'single'}}
       require('mason-lspconfig').setup {
-        ensure_installed = {'clangd', 'lua_ls', 'pyright'},
+        ensure_installed = {'clangd', 'lua_ls', 'pyright', 'ruff'},
       }
     end,
   },
@@ -194,7 +194,21 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig.clangd.setup {capabilities = capabilities}
-lspconfig.pyright.setup {capabilities = capabilities}
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+  settings = {
+    pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
+    python = {analysis = {ignore = {'*'}}}, -- ignore all files for analysis to exclusively use Ruff for linting
+  },
+}
+lspconfig.ruff.setup {
+  capabilities = capabilities,
+  on_attach = function(client, _)
+    if client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false -- disable hover in favor of Pyright
+    end
+  end,
+}
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
