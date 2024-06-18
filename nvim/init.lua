@@ -1,5 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.loaded_python3_provider = 0 -- disable Python plugin support to speed up startup
 
 -- Install plugin manager
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
