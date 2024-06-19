@@ -198,7 +198,6 @@ lspconfig.pyright.setup {
   capabilities = capabilities,
   settings = {
     pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
-    python = {analysis = {ignore = {'*'}}}, -- ignore all files for analysis to exclusively use Ruff for linting
   },
 }
 lspconfig.ruff.setup {
