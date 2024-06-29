@@ -202,6 +202,7 @@ lspconfig.pyright.setup {
 }
 lspconfig.ruff.setup {
   capabilities = capabilities,
+  init_options = {settings = {showSyntaxErrors = false}}, -- only get syntax errors from Pyright
   on_attach = function(client, _)
     if client.name == 'ruff' then
       client.server_capabilities.hoverProvider = false -- disable hover in favor of Pyright
