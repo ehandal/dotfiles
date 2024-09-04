@@ -29,7 +29,9 @@ def get_github_release(repo: str, name_re: str, file: str):
     sys.exit('ERROR: no release found for github repo {repo}')
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--pyenv', action='store_true', help='install pyenv')
 parser.add_argument('--skip-apt', action='store_true', help='skip Ubuntu apt commands')
+parser.add_argument('--vim-ppa', action='store_true', help='add vim PPA')
 args = parser.parse_args()
 
 dotfile_dir = Path(__file__).parent
@@ -37,18 +39,9 @@ config_dir = Path.home() / '.config'
 data_dir = Path.home() / '.local/share'
 
 system = platform.system()
-if system == 'Linux':
-    try:
-        distro = subprocess.check_output(['lsb_release', '-is'], text=True)
-        distro = distro.rstrip()
-    except FileNotFoundError:
-        distro = None
-    if distro is None:
-        if not Path('/data/data/com.termux').exists():
-            sys.exit('ERROR: could not determine Linux distro')
-        distro = 'Termux'
-    else:
-        assert distro == 'Ubuntu', distro
+if system != 'Linux':
+    distro = platform.freedesktop_os_release()['ID']
+    assert distro == 'ubuntu', distro
 else:
     sys.exit(f'Unexpected system {system}')
 
@@ -88,9 +81,10 @@ if system == 'Linux' and distro == 'Ubuntu':
         apt_cache_policy = subprocess.check_output(['apt-cache', 'policy'], text=True)
 
         # PPAs
-        for ppa in ['jonathonf/vim']:
-            if ppa not in apt_cache_policy:
-                subprocess.run(['sudo', 'add-apt-repository', f'ppa:{ppa}'], check=True)
+        if args.vim_ppa:
+            vim_ppa = 'jonathonf/vim'
+            if vim_ppa not in apt_cache_policy:
+                subprocess.run(['sudo', 'add-apt-repository', f'ppa:{vim_ppa}'], check=True)
 
         # nodejs
         if 'nodesource' not in apt_cache_policy:
@@ -98,20 +92,20 @@ if system == 'Linux' and distro == 'Ubuntu':
                 subprocess.run(['sudo', '-E', 'bash', '-'], input=req.read(), check=True)
 
         # install apt packages
-        packages = {
-            # general
+        packages = { # general
             'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'nodejs',
-            'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape', 'zsh',
-
-            # tmux build
-            'libevent-dev', 'libncurses-dev', 'libutempter-dev',
-
-            # python build
-            'libbz2-dev', 'libffi-dev', 'libgdbm-dev', 'liblzma-dev',
-            'libncurses-dev', 'libreadline-dev', 'libsqlite3-dev', 'libssl-dev',
-            'uuid-dev', 'zlib1g-dev',
+            'openssh-server', 'python3-pip', 'python3-venv', 'vim', 'xcape',
+            'xclip', 'xsel', 'zsh',
         }
-        subprocess.run(['sudo', 'apt', 'install'] + sorted(packages), check=True)
+        packages |= {'libevent-dev', 'libncurses-dev', 'libutempter-dev'} # tmux build
+        if args.pyenv:
+            packages |= { # python build
+                'libbz2-dev', 'libffi-dev', 'libgdbm-dev', 'liblzma-dev',
+                'libncurses-dev', 'libreadline-dev', 'libsqlite3-dev', 'libssl-dev',
+                'uuid-dev', 'zlib1g-dev',
+            }
+        packages |= {'ninja-build', 'gettext', 'cmake', 'unzip', 'curl', 'gcc', 'g++', 'make'} # neovim build
+        subprocess.run(['sudo', 'apt', 'install', *sorted(packages)], check=True)
 
     semver_re = r'(\d+\.\d+\.\d+)'
     github_releases = (
@@ -170,7 +164,7 @@ if system == 'Linux' and distro == 'Ubuntu':
                 subprocess.run(['make', 'install'], cwd=tmux_src_dir, check=True)
 
     # pyenv
-    if shutil.which('pyenv') is None:
+    if args.pyenv and shutil.which('pyenv') is None:
         pyenv_root = data_dir / 'pyenv'
         pyenv_env = dict(os.environ, PYENV_ROOT=pyenv_root)
 
@@ -187,11 +181,10 @@ if system == 'Linux' and distro == 'Ubuntu':
                 continue
             minor, patchlevel = m.groups()
             version = (3, int(minor), int(patchlevel))
-            if latest_version < version:
-                latest_version = version
+            latest_version = max(latest_version, version)
         assert latest_version != (3, 0, 0)
         latest_version_str = '.'.join(str(i) for i in latest_version)
-        install_env = dict(pyenv_env, CONFIGURE_OPTS='--enable-optimizations')
+        install_env = dict(pyenv_env, PYTHON_CONFIGURE_OPTS='--enable-optimizations --with-lto', PYTHON_CFLAGS='-march=native')
         subprocess.run([pyenv_bin, 'install', latest_version_str], env=install_env, check=True)
         subprocess.run([pyenv_bin, 'global', latest_version_str], env=pyenv_env, check=True)
 
