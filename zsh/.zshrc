@@ -87,6 +87,10 @@ function precmd() {
 local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
 PROMPT="%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} "
 
+if [[ -d ~/.local/share/zsh/functions ]] then
+    fpath=(~/.local/share/zsh/functions $fpath)
+fi
+
 # Use modern completion system
 mkdir -p ~/.cache/zsh/zcompcache
 zmodload -i zsh/complist

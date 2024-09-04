@@ -2,6 +2,7 @@ export ZDOTDIR=~/.config/zsh
 skip_global_compinit=1 # prevents /etc/zsh/zshrc from calling compinit
 
 mkdir -p ~/.local/share
+export CARGO_HOME=~/.local/share/cargo
 export INPUTRC=~/.config/inputrc
 export IPYTHONDIR=~/.config/ipython
 export LESSHISTFILE=~/.local/share/lesshst
@@ -14,11 +15,14 @@ export PYLINTHOME=~/.cache/pylint
 
 typeset -U PATH path
 if [[ $OSTYPE == linux-gnu ]]; then
-    [[ -d /snap/bin ]] && path=(/snap/bin $path)
-    path=(
-        ~/.local/share/npm/bin
-        $PYENV_ROOT/bin
-        $path)
+    function () {
+        local p
+        for p in /snap/bin ~/.local/share/npm/bin $PYENV_ROOT/bin; do
+            if [[ -d $p ]]; then
+                path=($p $path)
+            fi
+        done
+    }
 fi
 path=(
     ~/bin
