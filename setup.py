@@ -39,7 +39,7 @@ config_dir = Path.home() / '.config'
 data_dir = Path.home() / '.local/share'
 
 system = platform.system()
-if system != 'Linux':
+if system == 'Linux':
     distro = platform.freedesktop_os_release()['ID']
     assert distro == 'ubuntu', distro
 else:
