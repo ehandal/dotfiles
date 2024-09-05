@@ -76,7 +76,7 @@ for file, p in symlinks:
         path.unlink()
     path.symlink_to(target)
 
-if system == 'Linux' and distro == 'Ubuntu':
+if system == 'Linux' and distro == 'ubuntu':
     if not args.skip_apt:
         apt_cache_policy = subprocess.check_output(['apt-cache', 'policy'], text=True)
 
