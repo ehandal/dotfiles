@@ -26,7 +26,7 @@ def get_github_release(repo: str, name_re: str, file: str):
             download_url = asset['browser_download_url']
             assert isinstance(download_url, str), download_url
             return version, download_url, file
-    sys.exit('ERROR: no release found for github repo {repo}')
+    sys.exit(f'ERROR: no release found for github repo {repo}')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--pyenv', action='store_true', help='install pyenv')
