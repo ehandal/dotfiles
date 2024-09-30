@@ -146,4 +146,9 @@ if (( $+commands[pyenv] )); then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+if (( $+commands[uv] )); then
+    eval "$(uv generate-shell-completion zsh)"
+    eval "$(uvx --generate-shell-completion zsh)"
+fi
+
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
