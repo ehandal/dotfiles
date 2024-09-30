@@ -17,7 +17,7 @@ typeset -U PATH path
 if [[ $OSTYPE == linux-gnu ]]; then
     function () {
         local p
-        for p in /snap/bin ~/.local/share/npm/bin $PYENV_ROOT/bin; do
+        for p in /snap/bin ~/.local/share/npm/bin $CARGO_HOME/bin $PYENV_ROOT/bin; do
             if [[ -d $p ]]; then
                 path=($p $path)
             fi
