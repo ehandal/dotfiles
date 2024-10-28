@@ -166,6 +166,7 @@ require('lazy').setup({
     },
   },
   {'folke/lazydev.nvim', ft = 'lua', opts = {}},
+  {'stevearc/dressing.nvim', opts = {}},
 
   -- colorschemes
   {
