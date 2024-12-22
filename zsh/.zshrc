@@ -58,6 +58,8 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 alias rg='rg --no-heading'
+alias vi=nvim
+alias view='nvim -R'
 
 if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
     local win_name="%n@%m: %~"
@@ -117,7 +119,7 @@ zstyle '*' single-ignored show
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-export EDITOR=vi
+export EDITOR=nvim
 export GPG_TTY=`tty`
 export BAT_THEME=base16
 
