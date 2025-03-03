@@ -17,31 +17,38 @@ HISTFILESIZE=10000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-STARTCOLOR="\[\e[32m\]";
-ENDCOLOR="\[\e[m\]";
-if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
-    PS1="$STARTCOLOR[\h] \W \$$ENDCOLOR "
+setprompt() {
+    if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
+        local win_name="\w [\h]"
+        local prompt="[\h] \W"
+    else
+        local win_name='\w'
+        local prompt="\W"
+    fi
+
+    # OSC 133
+    local PROMPT_START="\e]133;A\a"
+    local PROMPT_END="\e]133;B\a"
+
+    local STARTCOLOR="\[\e[32m\]"
+    local ENDCOLOR="\[\e[m\]"
+    PS1="$PROMPT_START$STARTCOLOR$prompt \$$ENDCOLOR $PROMPT_END"
     case "$TERM" in
     xterm*|rxvt*)
-        PS1="\[\e]0;\w [\h]\a\]$PS1"
+        PS1="\[\e]0;$win_name\a\]$PS1"
         ;;
     *)
         ;;
     esac
-else
-    PS1="$STARTCOLOR\W \$$ENDCOLOR "
-    case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;\w\a\]$PS1"
-        ;;
-    *)
-        ;;
-    esac
-fi
+}
+setprompt
+unset -f setprompt
 
 set -o vi
-export EDITOR=vi
+export EDITOR=nvim
 export GPG_TTY=$(tty)
+alias vi=nvim
+alias view='nvim -R'
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
