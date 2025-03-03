@@ -13,8 +13,8 @@
 [include]
 	path = ~/.config/git/config.local
 [merge]
-	conflictstyle = diff3
-	tool = vimdiff
+	conflictstyle = zdiff3
+	tool = nvimdiff
 [push]
 	default = simple
 [url "git@github.com:"]
