@@ -86,8 +86,10 @@ function precmd() {
     fi
 }
 
-local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
-PROMPT="%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} "
+function () {
+    local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
+    PROMPT="%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} "
+}
 
 if [[ -d ~/.local/share/zsh/functions ]] then
     fpath=(~/.local/share/zsh/functions $fpath)
@@ -99,8 +101,8 @@ zmodload -i zsh/complist
 autoload -Uz compinit
 compinit -d ~/.cache/zsh/zcompdump
 
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.cache/zsh/zcompcache
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.cache/zsh/zcompcache
 
 unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol
@@ -108,7 +110,7 @@ setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
 
-zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' menu select
 test -r ~/.config/dircolors && eval "$(dircolors -b ~/.config/dircolors)" || eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
