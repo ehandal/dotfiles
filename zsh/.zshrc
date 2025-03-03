@@ -96,7 +96,7 @@ function () {
     local prompt_end=$'\e]133;B\a'
 
     local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
-    PROMPT="$prompt_start%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} $prompt_end"
+    PROMPT="%{$prompt_start%}%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} %{$prompt_end%}"
 }
 
 if [[ -d ~/.local/share/zsh/functions ]] then
