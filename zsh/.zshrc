@@ -86,9 +86,17 @@ function precmd() {
     fi
 }
 
+function preexec() {
+    print -Pn "\e]133;C\a" # start of command output (OSC 133)
+}
+
 function () {
+    # OSC 133
+    local prompt_start=$'\e]133;A\a'
+    local prompt_end=$'\e]133;B\a'
+
     local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
-    PROMPT="%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} "
+    PROMPT="$prompt_start%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} $prompt_end"
 }
 
 if [[ -d ~/.local/share/zsh/functions ]] then
