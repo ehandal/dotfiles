@@ -12,6 +12,7 @@ export P4ENVIRO=~/.config/p4enviro
 export P4TICKETS=~/.local/share/p4tickets
 export PYENV_ROOT=~/.local/share/pyenv
 export PYLINTHOME=~/.cache/pylint
+export RUSTUP_HOME=~/.local/share/rustup
 
 typeset -U PATH path
 if [[ $OSTYPE == linux-gnu ]]; then
