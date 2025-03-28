@@ -28,6 +28,8 @@ local function base16_mods()
   vim.api.nvim_set_hl(0, 'TSError', {})
 end
 
+vim.o.winborder = 'rounded'
+
 require('lazy').setup({
   'christoomey/vim-tmux-navigator',
   {
@@ -130,7 +132,7 @@ require('lazy').setup({
     dependencies = 'williamboman/mason-lspconfig.nvim',
     build = ':MasonUpdate', -- :MasonUpdate updates registry contents
     config = function()
-      require('mason').setup {ui = {border = 'single'}}
+      require('mason').setup {ui = {border = vim.o.winborder}}
       require('mason-lspconfig').setup {
         ensure_installed = {'clangd', 'lua_ls', 'pyright', 'ruff'},
       }
@@ -198,7 +200,7 @@ require('lazy').setup({
       },
     },
   },
-}, {ui = {border = 'single'}})
+}, {ui = {border = vim.o.winborder}})
 
 vim.cmd.colorscheme 'catppuccin'
 
@@ -207,10 +209,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = 'base16-*',
     callback = base16_mods,
 })
-require('lspconfig.ui.windows').default_options.border = 'single'
-vim.diagnostic.config {float = {border = 'single'}}
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'single', title = 'hover'})
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single', title = 'signature'})
 
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
