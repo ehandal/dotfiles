@@ -159,7 +159,11 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     init = function() vim.o.showmode = false end,
     opts = {
-      options = {theme = 'base16'},
+      options = {
+        -- separators for better matching tmux catppuccin
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+      },
       sections = {lualine_c = {{'filename', path = 1}}}, -- show relative path
       tabline = {lualine_a = {'buffers'}},
       extensions = {'lazy', 'man', 'quickfix'},
@@ -171,16 +175,32 @@ require('lazy').setup({
   -- colorschemes
   {
     'RRethy/nvim-base16',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require('base16-colorscheme').setup('tomorrow-night', {telescope_borders = true})
-      vim.cmd.colorscheme 'base16-tomorrow-night'
-      base16_mods()
+      -- vim.cmd.colorscheme 'base16_mods-tomorrow-night'
+      -- base16_mods()
     end,
   },
   {'ellisonleao/gruvbox.nvim', lazy = true},
+  {
+    'catppuccin/nvim', name = 'catppuccin', priority = 1000,
+    opts = {
+      integrations = {
+        mason = true,
+        native_lsp = {underlines = {
+          errors = {'undercurl'},
+          hints = {'undercurl'},
+          warnings = {'undercurl'},
+          information = {'undercurl'},
+          ok = {'undercurl'},
+        }},
+      },
+    },
+  },
 }, {ui = {border = 'single'}})
+
+vim.cmd.colorscheme 'catppuccin'
 
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = vim.api.nvim_create_augroup('B16TomorrowNight', {}),
