@@ -130,7 +130,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 export EDITOR=nvim
 export GPG_TTY=`tty`
-export BAT_THEME=base16
+export BAT_THEME="Catppuccin Mocha"
 
 if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --no-ignore --follow'
@@ -149,7 +149,14 @@ fi
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
-[[ -f ~/.local/share/base16-fzf/bash/base16-tomorrow-night.config ]] && source ~/.local/share/base16-fzf/bash/base16-tomorrow-night.config
+# fzf catppuccin mocha
+export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+    --color=selected-bg:#45475a \
+    --multi"
+
 [[ -f ~/.config/zsh/zshrc.local ]] && source ~/.config/zsh/zshrc.local
 
 if (( $+commands[pyenv] )); then
