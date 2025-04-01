@@ -8,6 +8,7 @@
 	l = log --oneline
 	s = status --short --branch
 	st = status
+	sw = switch
 	up = pull --rebase
 	ups = pull --rebase --autostash
 [include]
