@@ -1,0 +1,59 @@
+line-length = 160
+target-version = "py312"
+
+[lint]
+select = [
+    "A",
+    "B",
+    "BLE",
+    "C4",
+    "COM",
+    "E4",
+    "E7",
+    "E9",
+    "F",
+    "FLY",
+    "FURB",
+    "I",
+    "ICN",
+    "ISC",
+    "N",
+    "PD",
+    "PERF",
+    "PGH",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "PYI",
+    "Q",
+    "RET",
+    "RSE",
+    "RUF",
+    "SIM",
+    "SLF",
+    "TC",
+    "UP",
+    "W",
+]
+ignore = [
+    "E741",    # ambiguous-variable-name
+    "PLR0911", # too-many-return-statements
+    "PLR0912", # too-many-branches
+    "PLR0913", # too-many-arguments
+    "PLR0915", # too-many-statements
+    "PLR2004", # magic-value-comparison
+    "PLW1510", # subprocess-run-without-check
+    "PLW2901", # redefined-loop-name
+    "SIM102",  # collapsible-if
+    "SIM108",  # if-else-block-instead-of-if-exp
+]
+
+[lint.flake8-quotes]
+inline-quotes = "single"
+
+[lint.isort]
+lines-after-imports = 1
+
+[format]
+quote-style = "single"

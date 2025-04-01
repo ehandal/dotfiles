@@ -51,6 +51,7 @@ symlinks = (
     ('inputrc', f'{config_dir}/'),
     ('npmrc', f'{config_dir}/'),
     ('nvim', f'{config_dir}/'),
+    ('ruff.toml', f'{config_dir}/ruff/'),
     ('tmux', f'{config_dir}/'),
     ('vim', '.vim'),
     ('zsh', f'{config_dir}/'),
