@@ -16,6 +16,10 @@ export RUSTUP_HOME=~/.local/share/rustup
 
 typeset -U PATH path
 if [[ $OSTYPE == linux-gnu ]]; then
+    if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+
     function () {
         local p
         for p in /snap/bin ~/.local/share/npm/bin $CARGO_HOME/bin $PYENV_ROOT/bin; do
