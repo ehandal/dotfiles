@@ -144,7 +144,6 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
     },
-    tag = '0.1.8',
     config = function()
       require('telescope').load_extension('fzf')
       local builtin = require('telescope.builtin')
