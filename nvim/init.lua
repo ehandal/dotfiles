@@ -172,6 +172,11 @@ require('lazy').setup({
   },
   {'folke/lazydev.nvim', ft = 'lua', opts = {}},
   {'stevearc/dressing.nvim', opts = {}},
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
+    opts = {},
+  },
 
   -- colorschemes
   {
