@@ -133,7 +133,7 @@ require('lazy').setup({
     build = ':MasonUpdate', -- :MasonUpdate updates registry contents
     config = function()
       require('mason').setup {ui = {border = vim.o.winborder}}
-      require('mason-lspconfig').setup {
+      require('mason-lspconfig').setup { ---@diagnostic disable-line: missing-fields
         ensure_installed = {'clangd', 'lua_ls', 'pyright', 'ruff'},
       }
     end,
@@ -204,7 +204,7 @@ require('lazy').setup({
       },
     },
   },
-}, {ui = {border = vim.o.winborder}})
+}, {ui = {border = vim.o.winborder}}) ---@diagnostic disable-line: missing-fields
 
 vim.cmd.colorscheme 'catppuccin'
 
