@@ -113,17 +113,10 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      local function is_large_file(_, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        end
-      end
       require('nvim-treesitter.configs').setup { ---@diagnostic disable-line: missing-fields
         ensure_installed = {'c', 'cpp', 'lua', 'python', 'vim'},
-        highlight = {enable = true, disable = is_large_file},
-        indent = {enable = true, disable = is_large_file},
+        highlight = {enable = true},
+        indent = {enable = true},
       }
     end,
   },
@@ -145,14 +138,15 @@ require('lazy').setup({
       {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
     },
     config = function()
-      require('telescope').load_extension('fzf')
+      local telescope = require('telescope')
+      telescope.setup {}
+      telescope.load_extension('fzf')
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<Leader>fa', builtin.builtin)
       vim.keymap.set('n', '<Leader>ff', builtin.find_files)
       vim.keymap.set('n', '<Leader>fg', builtin.live_grep)
       vim.keymap.set('n', '<Leader>fb', builtin.buffers)
       vim.keymap.set('n', '<Leader>fh', builtin.help_tags)
-      require('telescope').setup {defaults = {preview = {treesitter = false}}} -- slow treesitter can cause huge previewer lag
     end,
   },
   {'nvim-tree/nvim-web-devicons', lazy = true},
