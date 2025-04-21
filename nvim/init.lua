@@ -164,7 +164,8 @@ require('lazy').setup({
       extensions = {'lazy', 'man', 'quickfix'},
     },
   },
-  {'folke/lazydev.nvim', ft = 'lua', opts = {}},
+  {'folke/lazydev.nvim', ft = 'lua', opts = {library = {path = '${3rd}/luv/library', words = {'vim%.uv'}}},
+  },
   {'stevearc/dressing.nvim', opts = {}},
   {
     'MeanderingProgrammer/render-markdown.nvim',
