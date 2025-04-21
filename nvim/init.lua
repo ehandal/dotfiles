@@ -139,7 +139,7 @@ require('lazy').setup({
     },
     config = function()
       local telescope = require('telescope')
-      telescope.setup {}
+      telescope.setup {defaults = {border = false}} -- workaround for winborder support https://github.com/nvim-telescope/telescope.nvim/issues/3436
       telescope.load_extension('fzf')
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<Leader>fa', builtin.builtin)
