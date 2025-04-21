@@ -296,6 +296,7 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
           [vim.diagnostic.severity.HINT] = '',
         },
       },
+      jump = {severity = {min = vim.diagnostic.severity.INFO}},
     }
 
     vim.keymap.set('n', 'gK', function()
