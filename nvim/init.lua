@@ -274,7 +274,20 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     end
 
+    local virtual_lines_opts = { ---@type vim.diagnostic.Opts.VirtualLines
+      current_line = true,
+      format = function(diagnostic)
+        if diagnostic.severity > vim.diagnostic.severity.INFO then
+          return nil
+        end
+        if diagnostic.code then
+          return string.format('%s [%s]', diagnostic.message, diagnostic.code)
+        end
+        return diagnostic.message
+      end,
+    }
     vim.diagnostic.config {
+      virtual_lines = virtual_lines_opts,
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -284,6 +297,14 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
         },
       },
     }
+
+    vim.keymap.set('n', 'gK', function()
+      if vim.diagnostic.config().virtual_lines then
+        vim.diagnostic.config({virtual_lines = false})
+      else
+        vim.diagnostic.config({virtual_lines = virtual_lines_opts})
+      end
+    end, {desc = 'Toggle diagnostic virtual_lines'})
   end,
 })
 
