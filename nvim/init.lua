@@ -238,6 +238,10 @@ lspconfig.lua_ls.setup {
   },
 }
 
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevel = 99
+
 vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
 
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
@@ -257,6 +261,13 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
     bufmap('n', 'gS', telesope_builtin.lsp_dynamic_workspace_symbols, 'Workspace symbols')
     bufmap('n', 'grr', telesope_builtin.lsp_references, 'Go to references')
     bufmap({ 'n', 'x' }, 'grf', vim.lsp.buf.format, 'Code format')
+
+    -- Prefer LSP folding if client supports it
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client ~= nil and client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
   end,
 })
 
