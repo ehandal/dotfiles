@@ -247,7 +247,7 @@ vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldlevel = 99
 
-vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics)
 
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
