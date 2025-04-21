@@ -209,34 +209,39 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     callback = base16_mods,
 })
 
-local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.clangd.setup {capabilities = capabilities}
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-  settings = {
-    pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
+local lsp_configs = { ---@type table<string, vim.lsp.Config>
+  clangd = {capabilities = capabilities},
+  pyright = {
+    capabilities = capabilities,
+    settings = {
+      pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
+    },
   },
-}
-lspconfig.ruff.setup {
-  capabilities = capabilities,
-  init_options = {settings = {showSyntaxErrors = false}}, -- only get syntax errors from Pyright
-  on_attach = function(client, _)
-    if client.name == 'ruff' then
-      client.server_capabilities.hoverProvider = false -- disable hover in favor of Pyright
-    end
-  end,
-}
-lspconfig.lua_ls.setup {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      completion = {callSnippet = 'Replace'},
-      telemetry = {enable = false},
-      workspace = {checkThirdParty = false},
+  ruff = {
+    capabilities = capabilities,
+    init_options = {settings = {showSyntaxErrors = false}}, -- only get syntax errors from Pyright
+    on_attach = function(client, _)
+      if client.name == 'ruff' then
+        client.server_capabilities.hoverProvider = false -- disable hover in favor of Pyright
+      end
+    end,
+  },
+  lua_ls = {
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        completion = {callSnippet = 'Replace'},
+        telemetry = {enable = false},
+        workspace = {checkThirdParty = false},
+      },
     },
   },
 }
+for server, config in pairs(lsp_configs) do
+  vim.lsp.enable(server)
+  vim.lsp.config(server, config)
+end
 
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
