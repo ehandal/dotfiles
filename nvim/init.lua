@@ -296,6 +296,8 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
           [vim.diagnostic.severity.HINT] = '',
         },
       },
+      float = {source = 'if_many'},
+      severity_sort = true,
       jump = {severity = {min = vim.diagnostic.severity.INFO}},
     }
 
