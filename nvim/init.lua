@@ -16,12 +16,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local function has_words_before()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
 local function base16_mods()
   vim.api.nvim_set_hl(0, 'Identifier', {})
   vim.api.nvim_set_hl(0, 'TSVariable', {})
@@ -53,61 +47,13 @@ require('lazy').setup({
   'tpope/vim-unimpaired',
 
   'neovim/nvim-lspconfig',
-  {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-path',
 
-      {'L3MON4D3/LuaSnip', version = '2.*', build = 'make install_jsregexp'},
-      'saadparwaiz1/cmp_luasnip',
-    },
-    config = function()
-        local cmp = require 'cmp'
-        cmp.setup {
-            snippet = {expand = function(args) require('luasnip').lsp_expand(args.body) end},
-            window = {completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered()},
-            mapping = cmp.mapping.preset.insert {
-                ['<C-Space>'] = cmp.mapping.complete(),
-                ['<C-e>'] = cmp.mapping.abort(),
-                ['<CR>'] = cmp.mapping.confirm {select = true},
-                ['<Tab>'] = cmp.mapping(function(fallback)
-                  local luasnip = require 'luasnip'
-                  if cmp.visible() then
-                    cmp.select_next_item()
-                  -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                  -- that way you will only jump inside the snippet region
-                  elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                  elseif has_words_before() then
-                    cmp.complete()
-                  else
-                    fallback()
-                  end
-                end, {'i', 's'}),
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                  local luasnip = require 'luasnip'
-                  if cmp.visible() then
-                    cmp.select_prev_item()
-                  elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                  else
-                    fallback()
-                  end
-                end, {'i', 's'}),
-            },
-            sources = cmp.config.sources({
-                {name = 'nvim_lsp'},
-                {name = 'nvim_lsp_signature_help'},
-                {name = 'luasnip'},
-            }, {
-                {name = 'path'},
-                {name = 'buffer'},
-            }),
-        }
-    end,
+  {
+    'saghen/blink.cmp',
+    version = '1.*',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {keymap = {preset = 'enter'}},
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -187,7 +133,19 @@ require('lazy').setup({
   {
     'catppuccin/nvim', name = 'catppuccin', priority = 1000,
     opts = {
+      custom_highlights = function(colors)
+        return {
+          Pmenu = {bg = colors.none},
+          BlinkCmpMenu = { fg = colors.text, bg = colors.none},
+          BlinkCmpMenuBorder = { fg = colors.overlay0, bg = colors.none},
+          BlinkCmpMenuSelection = { bg = colors.surface0 },
+          BlinkCmpLabel = { fg = colors.text },
+          BlinkCmpDocBorder = { fg = colors.overlay0, bg = colors.none},
+          BlinkCmpDoc = { fg = colors.text, bg = colors.none},
+        }
+      end,
       integrations = {
+        blink_cmp = true,
         mason = true,
         native_lsp = {underlines = {
           errors = {'undercurl'},
@@ -209,17 +167,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     callback = base16_mods,
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_configs = { ---@type table<string, vim.lsp.Config>
-  clangd = {capabilities = capabilities},
+  clangd = {},
   pyright = {
-    capabilities = capabilities,
     settings = {
       pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
     },
   },
   ruff = {
-    capabilities = capabilities,
     init_options = {settings = {showSyntaxErrors = false}}, -- only get syntax errors from Pyright
     on_attach = function(client, _)
       if client.name == 'ruff' then
@@ -228,7 +183,6 @@ local lsp_configs = { ---@type table<string, vim.lsp.Config>
     end,
   },
   lua_ls = {
-    capabilities = capabilities,
     settings = {
       Lua = {
         completion = {callSnippet = 'Replace'},
