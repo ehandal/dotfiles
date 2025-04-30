@@ -26,20 +26,6 @@ vim.o.winborder = 'rounded'
 
 require('lazy').setup({
   'christoomey/vim-tmux-navigator',
-  {
-    'edkolev/tmuxline.vim',
-    init = function()
-      vim.g.tmuxline_powerline_separators = 1
-      vim.g.tmuxline_preset = {
-        a       = '#S',
-        win     = {'#I', '#W'},
-        cwin    = {'#I', '#W'},
-        z       = '#H',
-        options = {['status-justify'] = 'left'},
-      }
-    end,
-    cmd = 'Tmuxline',
-  },
   {'godlygeek/tabular', cmd = 'Tabularize'},
   'tpope/vim-fugitive',
   'tpope/vim-repeat',
