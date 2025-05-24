@@ -60,6 +60,7 @@ alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 alias rg='rg --no-heading'
 alias vi=nvim
 alias view='nvim -R'
+alias tldr='tldr --compact'
 
 if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
     local win_name="%n@%m: %~"
