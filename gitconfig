@@ -9,13 +9,14 @@
 	s = status --short --branch
 	st = status
 	sw = switch
-	up = pull --rebase
-	ups = pull --rebase --autostash
+	up = pull --autostash
 [include]
 	path = ~/.config/git/config.local
 [merge]
 	conflictstyle = zdiff3
 	tool = nvimdiff
+[pull]
+	rebase = true
 [push]
 	default = simple
 [url "git@github.com:"]
