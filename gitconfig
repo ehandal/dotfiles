@@ -1,4 +1,5 @@
 [alias]
+	a = add
 	b = branch
 	c = commit
 	co = checkout
@@ -7,9 +8,22 @@
 	f = fetch
 	l = log --oneline
 	s = status --short --branch
+	sh = show
 	st = status
+	sta = stash
+	stap = stash apply
+	std = stash drop
+	stl = stash list
+	stp = stash pop
+	sts = stash save
+	stsh = stash show
 	sw = switch
 	up = pull --autostash
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtm = worktree move
+	wtr = worktree remove
 [include]
 	path = ~/.config/git/config.local
 [init]
