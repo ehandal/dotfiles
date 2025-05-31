@@ -91,7 +91,14 @@ require('lazy').setup({
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
       },
-      sections = {lualine_c = {{'filename', path = 1}}}, -- show relative path
+      sections = {
+        lualine_b = {
+          'branch',
+          'diff',
+          {'diagnostics', sections = {'error', 'warn', 'info'}}, --exclude hints
+        },
+        lualine_c = {{'filename', path = 1}}, -- show relative path
+      },
       tabline = {lualine_a = {'buffers'}},
       extensions = {'lazy', 'man', 'quickfix'},
     },
