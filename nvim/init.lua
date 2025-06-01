@@ -362,10 +362,26 @@ vim.keymap.set('n', '<C-p>', '<Cmd>bp<CR>', {silent = true})
 vim.keymap.set('n', '<C-n>', '<Cmd>bn<CR>', {silent = true})
 
 local misc_augroup = vim.api.nvim_create_augroup('misc', {})
-vim.api.nvim_create_autocmd('BufReadPost', {group = misc_augroup,
-  callback = function()
-    vim.cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] -- :help last-position-jump
-  end,
+
+-- :help restore-cursor
+vim.api.nvim_create_autocmd('BufReadPre', {group = misc_augroup,
+  callback = function(args)
+    vim.api.nvim_create_autocmd('FileType', {
+      buffer = args.buf,
+      once = true,
+      callback = function()
+        local line = vim.fn.line("'\"")
+        local last_line = vim.fn.line('$')
+        local filetype = vim.bo.filetype
+        if line >= 1 and line <= last_line
+            and not filetype:match('commit')
+            and filetype ~= 'xxd'
+            and filetype ~= 'gitrebase' then
+          vim.cmd('normal! g`"')
+        end
+      end
+    })
+  end
 })
 
 -- file-specific settings
