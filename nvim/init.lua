@@ -367,6 +367,9 @@ vim.api.nvim_create_autocmd('BufReadPost', {group = misc_augroup,
     vim.cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] -- :help last-position-jump
   end,
 })
+
+-- file-specific settings
+vim.filetype.add({filename = {gitconfig = 'gitconfig'}})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
   callback = function()
     vim.bo.tabstop = 2
@@ -381,5 +384,10 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', '
     vim.wo.number = true
     vim.wo.relativenumber = true
     vim.wo.signcolumn = 'number'
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'gitconfig',
+  callback = function()
+    vim.bo.expandtab = false
   end,
 })
