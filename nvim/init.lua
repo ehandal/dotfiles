@@ -25,6 +25,11 @@ local function base16_mods()
   vim.api.nvim_set_hl(0, 'TSError', {})
 end
 
+local function set_number_signcolumn()
+  vim.wo.number = true
+  vim.wo.signcolumn = 'yes'
+end
+
 vim.o.winborder = 'rounded'
 
 require('lazy').setup({
@@ -131,6 +136,7 @@ require('lazy').setup({
       signs = {add = {text = '+'}}, ---@diagnostic disable-line: missing-fields
       signs_staged = {add = {text = '+'}}, ---@diagnostic disable-line: missing-fields
       on_attach = function(bufnr)
+        set_number_signcolumn()
         local gitsigns = require('gitsigns')
 
         local function map(mode, l, r, opts)
@@ -282,6 +288,7 @@ vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics)
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
   callback = function(ev)
+    set_number_signcolumn()
     local function bufmap(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, {buffer = ev.buf, desc = 'LSP: ' .. desc})
     end
@@ -395,13 +402,7 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'},
   callback = function() vim.bo.commentstring = '// %s' end,
 })
-vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp', 'lua', 'python'},
-  callback = function()
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    vim.wo.signcolumn = 'number'
-  end,
-})
+vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'markdown', callback = set_number_signcolumn})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'gitconfig',
   callback = function()
     vim.bo.expandtab = false
