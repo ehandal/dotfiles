@@ -70,9 +70,8 @@ require('lazy').setup({
     end,
   },
   {
-    'williamboman/mason.nvim',
-    dependencies = 'williamboman/mason-lspconfig.nvim',
-    build = ':MasonUpdate', -- :MasonUpdate updates registry contents
+    'mason-org/mason.nvim',
+    dependencies = 'mason-org/mason-lspconfig.nvim',
     config = function()
       require('mason').setup {ui = {border = vim.o.winborder}}
       require('mason-lspconfig').setup { ---@diagnostic disable-line: missing-fields
