@@ -120,8 +120,7 @@ require('lazy').setup({
       extensions = {'lazy', 'man', 'quickfix'},
     },
   },
-  {'folke/lazydev.nvim', ft = 'lua', opts = {library = {path = '${3rd}/luv/library', words = {'vim%.uv'}}},
-  },
+  {'folke/lazydev.nvim', ft = 'lua', opts = {library = {path = '${3rd}/luv/library', words = {'vim%.uv'}}}},
   {'stevearc/dressing.nvim', opts = {}},
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -400,11 +399,7 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'},
-  callback = function() vim.bo.commentstring = '// %s' end,
-})
+  callback = function() vim.bo.commentstring = '// %s' end})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'markdown', callback = set_number_signcolumn})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'gitconfig',
-  callback = function()
-    vim.bo.expandtab = false
-  end,
-})
+  callback = function() vim.bo.expandtab = false end})
