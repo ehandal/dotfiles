@@ -7,6 +7,9 @@
 	ds = diff --staged
 	f = fetch
 	l = log --oneline
+	p = pull
+	rb = rebase
+	rbi = rebase --interactive
 	s = status --short --branch
 	sh = show
 	st = status
