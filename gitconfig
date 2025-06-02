@@ -21,7 +21,6 @@
 	sts = stash save
 	stsh = stash show
 	sw = switch
-	up = pull --autostash
 	wt = worktree
 	wta = worktree add
 	wtl = worktree list
@@ -38,6 +37,9 @@
 	rebase = true
 [push]
 	default = simple
+[rebase]
+	autosquash = true
+	autostash = true
 [url "git@github.com:"]
 	pushInsteadOf = git://github.com/
 	pushInsteadOf = https://github.com/
