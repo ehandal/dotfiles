@@ -4,7 +4,6 @@ skip_global_compinit=1 # prevents /etc/zsh/zshrc from calling compinit
 mkdir -p ~/.local/share
 export CARGO_HOME=~/.local/share/cargo
 export INPUTRC=~/.config/inputrc
-export IPYTHONDIR=~/.config/ipython
 export LESSHISTFILE=~/.local/share/lesshst
 export NODE_REPL_HISTORY=~/.local/share/node_repl_history
 export NPM_CONFIG_USERCONFIG=~/.config/npmrc
