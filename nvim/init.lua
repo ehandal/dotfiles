@@ -124,7 +124,9 @@ require('lazy').setup({
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = {'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons'},
-    opts = {},
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {sign = {enabled = false}},
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -399,6 +401,5 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'lua',
 })
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', 'cpp'},
   callback = function() vim.bo.commentstring = '// %s' end})
-vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'markdown', callback = set_number_signcolumn})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'gitconfig',
   callback = function() vim.bo.expandtab = false end})
