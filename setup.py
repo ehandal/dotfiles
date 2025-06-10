@@ -1,32 +1,14 @@
 #!/usr/bin/env python3
 import argparse
 import gzip
-import json
 import os
 import platform
-import re
 import shutil
 import subprocess
 import sys
 import tempfile
 import urllib.request
 from pathlib import Path
-
-def get_github_release(repo: str, name_re: str, file: str):
-    with urllib.request.urlopen(f'https://api.github.com/repos/{repo}/releases/latest') as req:
-        release = json.load(req)
-    release_name = release['name']
-    assert isinstance(release_name, str), release_name
-    m = re.fullmatch(name_re, release_name)
-    assert m is not None, repo
-    version = m.group(1)
-    file = file.format(version=version)
-    for asset in release['assets']:
-        if asset['name'] == file:
-            download_url = asset['browser_download_url']
-            assert isinstance(download_url, str), download_url
-            return version, download_url, file
-    sys.exit(f'ERROR: no release found for github repo {repo}')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--skip-apt', action='store_true', help='skip Ubuntu apt commands')
