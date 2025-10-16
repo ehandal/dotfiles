@@ -226,16 +226,19 @@ require('lazy').setup({
           BlinkCmpDoc = { fg = colors.text, bg = colors.none},
         }
       end,
-      integrations = {
-        blink_cmp = true,
-        mason = true,
-        native_lsp = {underlines = {
+      lsp_styles = {
+        underlines = {
           errors = {'undercurl'},
           hints = {'undercurl'},
           warnings = {'undercurl'},
           information = {'undercurl'},
           ok = {'undercurl'},
-        }},
+        },
+      },
+      integrations = {
+        blink_cmp = true,
+        diffview = true,
+        mason = true,
       },
     },
   },
