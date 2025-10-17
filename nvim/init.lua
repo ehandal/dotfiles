@@ -214,6 +214,8 @@ require('lazy').setup({
   {'ellisonleao/gruvbox.nvim', lazy = true},
   {
     'catppuccin/nvim', name = 'catppuccin', priority = 1000,
+    ---@module 'catppuccin'
+    ---@type CatppuccinOptions
     opts = {
       custom_highlights = function(colors)
         return {
