@@ -342,6 +342,7 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
 })
 
 -- general settings
+vim.o.cursorline = true
 vim.o.virtualedit = 'block'
 vim.o.wildmode = 'longest:full,full'
 vim.o.tabstop = 4
