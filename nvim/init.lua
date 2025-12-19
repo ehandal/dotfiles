@@ -103,7 +103,7 @@ require('lazy').setup({
     dependencies = 'mason-org/mason-lspconfig.nvim',
     config = function()
       require('mason').setup {ui = {border = vim.o.winborder}}
-      require('mason-lspconfig').setup { ---@diagnostic disable-line: missing-fields
+      require('mason-lspconfig').setup {
         ensure_installed = {'clangd', 'lua_ls', 'pyright', 'ruff'},
       }
     end,
@@ -262,7 +262,7 @@ require('lazy').setup({
       },
     },
   },
-}, {ui = {border = vim.o.winborder}}) ---@diagnostic disable-line: missing-fields
+}, {ui = {border = vim.o.winborder}})
 
 vim.cmd.colorscheme 'catppuccin'
 
