@@ -40,6 +40,9 @@ path=(
     $path)
 export PATH
 
+export P4CONFIG=.p4config
+export P4DIFF="diff -u"
+
 if [[ -f ~/.config/zsh/zshenv.local ]]; then
     source ~/.config/zsh/zshenv.local
 fi
