@@ -205,6 +205,7 @@ augroup misc
     autocmd FileType arduino,c,cpp,cs,cuda setlocal commentstring=//%s
     autocmd FileType c,cpp,python setlocal foldmethod=indent
     autocmd FileType gitconfig,java setlocal noexpandtab
+    autocmd FileType lua setlocal tabstop=2 shiftwidth=2
 
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " :help last-position-jump
 augroup END
