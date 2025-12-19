@@ -354,8 +354,6 @@ vim.o.smartcase = true
 vim.o.list = true
 vim.opt.listchars = {tab = '» ', trail = '·', nbsp = '␣'}
 
-vim.o.background = 'dark'
-vim.o.termguicolors = true
 vim.keymap.set('n', '<Leader>n', '<Cmd>nohlsearch<CR>', {silent = true})
 vim.keymap.set('n', '<Leader>w', '<Cmd>update<CR>', {silent = true})
 vim.keymap.set('n', '<C-p>', '<Cmd>bp<CR>', {silent = true})
