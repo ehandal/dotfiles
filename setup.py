@@ -79,7 +79,7 @@ if sys.platform == 'darwin' or (sys.platform == 'linux' and distro == 'ubuntu'):
 
     subprocess.run(['brew', 'install',
         'bat', 'btop', 'choose-rust', 'eza', 'fd', 'fzf', 'hexyl', 'hyperfine', 'lua-language-server', 'neovim',
-        'procs', 'pyright', 'ripgrep', 'ruff', 'tlrc', 'tmux', 'tree-sitter-cli', 'ty', 'uv', 'wget',
+        'procs', 'pyright', 'ripgrep', 'ruff', 'tlrc', 'tmux', 'tree-sitter-cli', 'ty', 'uv', 'wget', 'zsh-syntax-highlighting',
     ], check=True)
 
 # tmux

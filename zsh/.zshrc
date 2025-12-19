@@ -166,3 +166,4 @@ export FZF_DEFAULT_OPTS=" \
 [[ -f ~/.config/zsh/zshrc.local ]] && source ~/.config/zsh/zshrc.local
 
 source <(fzf --zsh)
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
