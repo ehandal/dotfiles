@@ -19,7 +19,7 @@ if s:is_windows
 elseif s:is_mac
     Plug '/opt/homebrew/opt/fzf'
 else
-    Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf', 'do': './install --all --xdg' }
+    Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 endif
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
