@@ -18,12 +18,13 @@ dotfile_dir = Path(__file__).parent
 config_dir = Path.home() / '.config'
 data_dir = Path.home() / '.local/share'
 
-system = platform.system()
-if system == 'Linux':
+if sys.platform == 'linux':
     distro = platform.freedesktop_os_release()['ID']
     assert distro == 'ubuntu', distro
+elif sys.platform != 'darwin':
+    sys.exit(f'Unexpected system {sys.platform}')
 else:
-    sys.exit(f'Unexpected system {system}')
+    distro = None
 
 symlinks = (
     ('bashrc', '.bashrc'),
@@ -57,17 +58,12 @@ for file, p in symlinks:
         path.unlink()
     path.symlink_to(target)
 
-if system == 'Linux' and distro == 'ubuntu':
-    if not args.skip_apt:
-        subprocess.run(['sudo', 'apt', 'install',
-            'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'openssh-server', 'vim', 'xclip', 'xsel', 'zsh',
-        ], check=True)
-
-    subprocess.run(['brew', 'install',
-        'bat', 'btop', 'choose-rust', 'eza', 'fd', 'fzf', 'hexyl', 'hyperfine', 'neovim', 'procs', 'pyright', 'ripgrep', 'ruff', 'tlrc', 'tmux', 'uv',
+if sys.platform == 'linux' and distro == 'ubuntu' and not args.skip_apt:
+    subprocess.run(['sudo', 'apt', 'install',
+        'aptitude', 'curl', 'gcc', 'git', 'make', 'ncdu', 'openssh-server', 'vim', 'xclip', 'xsel', 'zsh',
     ], check=True)
 
-if system == 'Linux' and shutil.which('infocmp'):
+if sys.platform == 'darwin' or (sys.platform == 'linux' and distro == 'ubuntu'):
     terms = {'mintty-direct', 'tmux-256color', 'tmux-direct', 'vte-direct'}
     def has_terminfo(term):
         return subprocess.run(['infocmp', term], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
@@ -80,6 +76,11 @@ if system == 'Linux' and shutil.which('infocmp'):
             print('Adding missing terminfo:', *missing_terms)
             subprocess.run(['tic', '-x', '-e', ','.join(missing_terms), fw.name])
         assert all(has_terminfo(term) for term in missing_terms)
+
+    subprocess.run(['brew', 'install',
+        'bat', 'btop', 'choose-rust', 'eza', 'fd', 'fzf', 'hexyl', 'hyperfine', 'lua-language-server', 'neovim',
+        'procs', 'pyright', 'ripgrep', 'ruff', 'tlrc', 'tmux', 'tree-sitter-cli', 'ty', 'uv', 'wget',
+    ], check=True)
 
 # tmux
 if not (tpm_dir := data_dir / 'tmux/plugins/tpm').exists():
