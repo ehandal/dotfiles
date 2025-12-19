@@ -70,6 +70,35 @@ require('lazy').setup({
     end,
   },
   {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+    init = function()
+      vim.g.no_plugin_maps = true -- Disable entire built-in ftplugin mappings to avoid conflicts.
+    end,
+    config = function()
+      local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, {desc = 'TS: ' .. desc})
+      end
+      local select = require('nvim-treesitter-textobjects.select')
+      map({'o', 'x'}, 'ac', function() select.select_textobject('@class.outer', 'textobjects') end, 'outer class')
+      map({'o', 'x'}, 'ic', function() select.select_textobject('@class.inner', 'textobjects') end, 'inner class')
+      map({'o', 'x'}, 'af', function() select.select_textobject('@function.outer', 'textobjects') end, 'outer function')
+      map({'o', 'x'}, 'if', function() select.select_textobject('@function.inner', 'textobjects') end, 'inner function')
+      map({'o', 'x'}, 'aa', function() select.select_textobject('@parameter.outer', 'textobjects') end, 'outer argument/parameter')
+      map({'o', 'x'}, 'ia', function() select.select_textobject('@parameter.inner', 'textobjects') end, 'inner argument/parameter')
+      local swap = require('nvim-treesitter-textobjects.swap')
+      map('n', '<Leader>sa', function() swap.swap_next '@parameter.inner' end, 'swap next argument/parameter')
+      map('n', '<Leader>Sa', function() swap.swap_previous '@parameter.outer' end, 'swap previous argument/parameter')
+      local move = require('nvim-treesitter-textobjects.move')
+      map({'n', 'o', 'x'}, ']f', function() move.goto_next_start('@function.outer', 'textobjects') end, 'next function')
+      map({'n', 'o', 'x'}, '[f', function() move.goto_previous_start('@function.outer', 'textobjects') end, 'previous function')
+      map({'n', 'o', 'x'}, ']F', function() move.goto_next_end('@function.outer', 'textobjects') end, 'next function')
+      map({'n', 'o', 'x'}, '[F', function() move.goto_previous_end('@function.outer', 'textobjects') end, 'previous function')
+      map({'n', 'o', 'x'}, ']a', function() move.goto_next_start('@parameter.inner', 'textobjects') end, 'next argument/parameter')
+      map({'n', 'o', 'x'}, '[a', function() move.goto_previous_start('@parameter.inner', 'textobjects') end, 'previous argument/parameter')
+    end,
+  },
+  {
     'mason-org/mason.nvim',
     dependencies = 'mason-org/mason-lspconfig.nvim',
     config = function()
