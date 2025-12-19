@@ -27,6 +27,12 @@ if [[ $OSTYPE == linux-gnu ]]; then
             fi
         done
     }
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    typeset -TU INFOPATH infopath
+    typeset -U MANPATH manpath FPATH fpath
+    if [[ -f /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
 fi
 path=(
     ~/bin
