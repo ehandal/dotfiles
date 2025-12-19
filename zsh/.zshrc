@@ -165,4 +165,4 @@ export FZF_DEFAULT_OPTS=" \
 
 [[ -f ~/.config/zsh/zshrc.local ]] && source ~/.config/zsh/zshrc.local
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+source <(fzf --zsh)
