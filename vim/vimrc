@@ -74,9 +74,7 @@ set formatprg=par
 set visualbell t_vb=
 
 set hlsearch
-set ignorecase
 set incsearch
-set smartcase
 
 set tabstop=4
 set shiftwidth=4
