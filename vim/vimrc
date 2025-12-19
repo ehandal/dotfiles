@@ -84,6 +84,7 @@ set smarttab
 set nofoldenable
 set foldmethod=syntax
 set foldopen-=block
+set foldlevelstart=99
 
 set undofile
 set nobackup
