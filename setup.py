@@ -64,7 +64,7 @@ if sys.platform == 'linux' and distro == 'ubuntu' and not args.skip_apt:
     ], check=True)
 
 if sys.platform == 'darwin' or (sys.platform == 'linux' and distro == 'ubuntu'):
-    terms = {'mintty-direct', 'tmux-256color', 'tmux-direct', 'vte-direct'}
+    terms = {'mintty-direct', 'tmux-256color', 'tmux-direct', 'vte-direct', 'xterm-ghostty'}
     def has_terminfo(term):
         return subprocess.run(['infocmp', term], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
     missing_terms = [term for term in sorted(terms) if not has_terminfo(term)]
