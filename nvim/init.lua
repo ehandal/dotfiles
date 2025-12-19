@@ -216,17 +216,6 @@ require('lazy').setup({
     ---@module 'catppuccin'
     ---@type CatppuccinOptions
     opts = {
-      custom_highlights = function(colors)
-        return {
-          Pmenu = {bg = colors.none},
-          BlinkCmpMenu = { fg = colors.text, bg = colors.none},
-          BlinkCmpMenuBorder = { fg = colors.overlay0, bg = colors.none},
-          BlinkCmpMenuSelection = { bg = colors.surface0 },
-          BlinkCmpLabel = { fg = colors.text },
-          BlinkCmpDocBorder = { fg = colors.overlay0, bg = colors.none},
-          BlinkCmpDoc = { fg = colors.text, bg = colors.none},
-        }
-      end,
       lsp_styles = {
         underlines = {
           errors = {'undercurl'},
