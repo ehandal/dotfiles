@@ -103,9 +103,7 @@ require('lazy').setup({
     dependencies = 'mason-org/mason-lspconfig.nvim',
     config = function()
       require('mason').setup {ui = {border = vim.o.winborder}}
-      require('mason-lspconfig').setup {
-        ensure_installed = {'clangd', 'lua_ls', 'pyright', 'ruff'},
-      }
+      require('mason-lspconfig').setup {ensure_installed = {'clangd'}}
     end,
   },
   {
