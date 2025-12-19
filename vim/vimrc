@@ -34,13 +34,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-python/python-syntax'
 
 " colorschemes
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'chriskempson/base16-vim'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
-Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
@@ -234,7 +232,7 @@ if s:is_windows
     colorscheme default
 else
     set background=dark
-    colorscheme base16-tomorrow-night
+    colorscheme catppuccin_mocha
 endif
 
 if filereadable(s:vimrc_local)
