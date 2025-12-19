@@ -151,6 +151,7 @@ if (( $+commands[fd] )); then
         fd --no-ignore --type d --hidden --follow --exclude ".git" --exclude ".svn" . "$1"
     }
 fi
+export FZF_TMUX=1
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
