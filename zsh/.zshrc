@@ -54,8 +54,13 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 autoload -U colors && colors
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-alias ls='ls --color=auto'
+if (( $+commands[eza] )); then
+    alias ls=eza
+else
+    export LSCOLORS="Gxfxcxdxbxegedabagacad"
+    alias ls='ls --color=auto'
+fi
+alias ll='ls -l'
 alias grep='grep --color=auto --exclude-dir={.git,.hg,.svn}'
 alias rg='rg --no-heading'
 alias vi=nvim
