@@ -29,6 +29,7 @@ else:
 symlinks = (
     ('bashrc', '.bashrc'),
     ('gitconfig', f'{config_dir}/git/config'),
+    ('editrc', '.editrc'),
     ('inputrc', f'{config_dir}/'),
     ('npmrc', f'{config_dir}/'),
     ('nvim', f'{config_dir}/'),
