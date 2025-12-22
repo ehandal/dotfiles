@@ -121,7 +121,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<Leader>fg', builtin.live_grep)
       vim.keymap.set('n', '<Leader>fb', builtin.buffers)
       vim.keymap.set('n', '<Leader>fh', builtin.help_tags)
-      vim.keymap.set('n', '<Leader>fm', builtin.man_pages)
+      vim.keymap.set('n', '<Leader>fm', function() builtin.man_pages{sections = {'ALL'}} end)
     end,
   },
   {'nvim-tree/nvim-web-devicons', lazy = true},
