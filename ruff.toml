@@ -35,6 +35,7 @@ select = [
     "TC",
     "UP",
     "W",
+    "YTT",
 ]
 ignore = [
     "E741",    # ambiguous-variable-name
