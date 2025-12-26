@@ -70,12 +70,12 @@ if sys.platform == 'darwin' or (sys.platform == 'linux' and distro == 'ubuntu'):
         return subprocess.run(['infocmp', term], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
     missing_terms = [term for term in sorted(terms) if not has_terminfo(term)]
     if missing_terms:
-        with urllib.request.urlopen('http://invisible-island.net/datafiles/current/terminfo.src.gz') as req, tempfile.NamedTemporaryFile('wb') as fw:
+        with urllib.request.urlopen('https://invisible-island.net/datafiles/current/terminfo.src.gz') as req, tempfile.NamedTemporaryFile('wb') as fw:
             with gzip.open(req) as fr:
                 shutil.copyfileobj(fr, fw)
             fw.flush()
             print('Adding missing terminfo:', *missing_terms)
-            subprocess.run(['tic', '-x', '-e', ','.join(missing_terms), fw.name])
+            subprocess.run(['tic', '-x', '-e', ','.join(missing_terms), fw.name], check=True)
         assert all(has_terminfo(term) for term in missing_terms)
 
     subprocess.run(['brew', 'install',
