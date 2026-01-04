@@ -271,7 +271,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 local lsp_configs = { ---@type table<string, vim.lsp.Config>
-  clangd = {},
+  clangd = {cmd = {'clangd', '--clang-tidy'}},
   pyright = {
     settings = {
       pyright = {disableOrganizeImports = true}, -- using Ruff's import organizer
