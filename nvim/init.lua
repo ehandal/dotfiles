@@ -269,11 +269,7 @@ for server, config in pairs(lsp_configs) do
   vim.lsp.config(server, config)
 end
 
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldlevel = 99
-
-vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics)
+vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics, {desc = 'Diagnostics'})
 
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
