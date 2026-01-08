@@ -177,7 +177,7 @@ require('lazy').setup({
           if vim.wo.diff then
             vim.cmd.normal({']c', bang = true})
           else
-            gitsigns.nav_hunk('next', {target = 'all'})
+            gitsigns.nav_hunk('next', {target = 'all'}) ---@diagnostic disable-line: missing-fields
           end
         end)
 
@@ -185,7 +185,7 @@ require('lazy').setup({
           if vim.wo.diff then
             vim.cmd.normal({'[c', bang = true})
           else
-            gitsigns.nav_hunk('prev', {target = 'all'})
+            gitsigns.nav_hunk('prev', {target = 'all'}) ---@diagnostic disable-line: missing-fields
           end
         end)
 
