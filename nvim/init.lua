@@ -19,12 +19,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local function base16_mods()
-  vim.api.nvim_set_hl(0, 'Identifier', {})
-  vim.api.nvim_set_hl(0, 'TSVariable', {})
-  vim.api.nvim_set_hl(0, 'TSError', {})
-end
-
 local function set_number_signcolumn()
   vim.wo.number = true
   vim.wo.signcolumn = 'yes'
@@ -238,16 +232,6 @@ require('lazy').setup({
 
   -- colorschemes
   {
-    'RRethy/nvim-base16',
-    lazy = true,
-    config = function()
-      require('base16-colorscheme').setup('tomorrow-night', {telescope_borders = true})
-      -- vim.cmd.colorscheme 'base16_mods-tomorrow-night'
-      -- base16_mods()
-    end,
-  },
-  {'ellisonleao/gruvbox.nvim', lazy = true},
-  {
     'catppuccin/nvim', name = 'catppuccin', priority = 1000,
     ---@module 'catppuccin'
     ---@type CatppuccinOptions
@@ -271,12 +255,6 @@ require('lazy').setup({
 }, {ui = {border = vim.o.winborder}})
 
 vim.cmd.colorscheme 'catppuccin'
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-    group = vim.api.nvim_create_augroup('B16TomorrowNight', {}),
-    pattern = 'base16-*',
-    callback = base16_mods,
-})
 
 local lsp_configs = { ---@type table<string, vim.lsp.Config>
   clangd = {cmd = {'clangd', '--clang-tidy'}},
