@@ -52,9 +52,6 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
     branch = 'main',
-    init = function()
-      vim.g.no_plugin_maps = true -- Disable entire built-in ftplugin mappings to avoid conflicts.
-    end,
     config = function()
       local function map(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, {desc = 'TS: ' .. desc})
