@@ -25,6 +25,7 @@ local function set_number_signcolumn()
 end
 
 vim.o.winborder = 'rounded'
+local treesitter_filetypes = {'c', 'cpp', 'lua', 'python', 'vim'}
 
 require('lazy').setup({
   'christoomey/vim-tmux-navigator',
@@ -46,22 +47,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup { ---@diagnostic disable-line: missing-fields
-        ensure_installed = {'c', 'cpp', 'lua', 'python', 'vim'},
-        highlight = {enable = true},
-        indent = {
-          enable = true,
-          disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end,
-        },
-      }
-    end,
+    config = function() require('nvim-treesitter').install(treesitter_filetypes) end,
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
@@ -407,3 +393,20 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = {'c', '
   callback = function() vim.bo.commentstring = '// %s' end})
 vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = 'gitconfig',
   callback = function() vim.bo.expandtab = false end})
+vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = treesitter_filetypes,
+  callback = function(args)
+    vim.treesitter.start() -- syntax highlighting
+
+    -- folding
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
+    vim.wo[0][0].foldlevel = 99
+
+    -- indentation
+    local max_filesize = 100 * 1024 -- 100 KB
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+    if not (ok and stats and stats.size > max_filesize) then
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
