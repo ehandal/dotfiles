@@ -272,6 +272,9 @@ for server, config in pairs(lsp_configs) do
   vim.lsp.config(server, config)
 end
 
+vim.keymap.set('n', '<Leader>og', require('neogit').open, {desc = 'Open Neogit'})
+vim.keymap.set('n', '<Leader>ol', require('lazy').home, {desc = 'Open Lazy'})
+vim.keymap.set('n', '<Leader>om', '<Cmd>Mason<CR>', {desc = 'Open Mason'})
 vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics, {desc = 'Diagnostics'})
 
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
