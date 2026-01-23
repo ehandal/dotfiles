@@ -19,9 +19,11 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local function set_number_signcolumn()
-  vim.wo.number = true
-  vim.wo.signcolumn = 'yes'
+local function set_number_signcolumn(bufnr)
+  for _, win in ipairs(vim.fn.win_findbuf(bufnr)) do
+    vim.wo[win].number = true
+    vim.wo[win].signcolumn = 'yes'
+  end
 end
 
 vim.o.winborder = 'rounded'
@@ -141,7 +143,7 @@ require('lazy').setup({
       signs = {add = {text = '+'}}, ---@diagnostic disable-line: missing-fields
       signs_staged = {add = {text = '+'}}, ---@diagnostic disable-line: missing-fields
       on_attach = function(bufnr)
-        set_number_signcolumn()
+        set_number_signcolumn(bufnr)
         local gitsigns = require('gitsigns')
 
         local function map(mode, l, r, opts)
@@ -275,7 +277,7 @@ vim.keymap.set('n', '<Leader>q', require('telescope.builtin').diagnostics, {desc
 local lsp_cfg_augroup = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
   callback = function(ev)
-    set_number_signcolumn()
+    set_number_signcolumn(ev.buf)
     local function bufmap(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, {buffer = ev.buf, desc = 'LSP: ' .. desc})
     end
