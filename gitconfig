@@ -22,6 +22,7 @@
 	stp = stash pop
 	stsh = stash show
 	sw = switch
+	unstage = restore --staged
 	wt = worktree
 	wta = worktree add
 	wtl = worktree list
