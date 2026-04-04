@@ -149,7 +149,7 @@ require('lazy').setup({
 
         local function map(mode, l, r, opts)
           opts = opts or {}
-          opts.buffer = bufnr
+          opts.buf = bufnr
           vim.keymap.set(mode, l, r, opts)
         end
 
@@ -283,7 +283,7 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
   callback = function(ev)
     set_number_signcolumn(ev.buf)
     local function bufmap(mode, lhs, rhs, desc)
-      vim.keymap.set(mode, lhs, rhs, {buffer = ev.buf, desc = 'LSP: ' .. desc})
+      vim.keymap.set(mode, lhs, rhs, {buf = ev.buf, desc = 'LSP: ' .. desc})
     end
 
     local telesope_builtin = require('telescope.builtin')
@@ -410,7 +410,7 @@ vim.api.nvim_create_autocmd('FileType', {group = misc_augroup, pattern = treesit
 
     -- indentation
     local max_filesize = 100 * 1024 -- 100 KB
-    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
     if not (ok and stats and stats.size > max_filesize) then
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
