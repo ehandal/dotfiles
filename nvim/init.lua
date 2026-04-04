@@ -240,7 +240,7 @@ require('lazy').setup({
   },
 }, {ui = {border = vim.o.winborder}})
 
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'catppuccin-nvim'
 
 local lsp_configs = { ---@type table<string, vim.lsp.Config>
   clangd = {cmd = {'clangd', '--clang-tidy'}},
