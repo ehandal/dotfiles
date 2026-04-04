@@ -27,7 +27,8 @@ local function set_number_signcolumn(bufnr)
 end
 
 vim.o.winborder = 'rounded'
-local treesitter_filetypes = {'c', 'cpp', 'lua', 'python', 'vim'}
+local treesitter_filetypes = {'c', 'cpp', 'lua', 'markdown', 'python', 'sh', 'vim', 'yaml'}
+local treesitter_parsers = {'bash', 'c', 'cpp', 'lua', 'markdown', 'python', 'vim', 'yaml', 'zsh'}
 
 require('lazy').setup({
   'christoomey/vim-tmux-navigator',
@@ -49,7 +50,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function() require('nvim-treesitter').install(treesitter_filetypes) end,
+    config = function() require('nvim-treesitter').install(treesitter_parsers) end,
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
