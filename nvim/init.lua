@@ -286,15 +286,15 @@ vim.api.nvim_create_autocmd('LspAttach', {group = lsp_cfg_augroup,
       vim.keymap.set(mode, lhs, rhs, {buf = ev.buf, desc = 'LSP: ' .. desc})
     end
 
-    local telesope_builtin = require('telescope.builtin')
-    bufmap('n', 'gd', telesope_builtin.lsp_definitions, 'Go to definition')
+    local telescope_builtin = require('telescope.builtin')
+    bufmap('n', 'gd', telescope_builtin.lsp_definitions, 'Go to definition')
     bufmap('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
     bufmap('n', '<Leader>k', vim.lsp.buf.signature_help, 'Signature help')
-    bufmap('n', 'gri', telesope_builtin.lsp_implementations, 'Go to implementation')
-    bufmap('n', 'grt', telesope_builtin.lsp_type_definitions, 'Type definition')
-    bufmap('n', 'gO', telesope_builtin.lsp_document_symbols, 'Document symbols')
-    bufmap('n', 'gS', telesope_builtin.lsp_dynamic_workspace_symbols, 'Workspace symbols')
-    bufmap('n', 'grr', telesope_builtin.lsp_references, 'Go to references')
+    bufmap('n', 'gri', telescope_builtin.lsp_implementations, 'Go to implementation')
+    bufmap('n', 'grt', telescope_builtin.lsp_type_definitions, 'Type definition')
+    bufmap('n', 'gO', telescope_builtin.lsp_document_symbols, 'Document symbols')
+    bufmap('n', 'gS', telescope_builtin.lsp_dynamic_workspace_symbols, 'Workspace symbols')
+    bufmap('n', 'grr', telescope_builtin.lsp_references, 'Go to references')
     bufmap({ 'n', 'x' }, 'grf', vim.lsp.buf.format, 'Code format')
 
     -- Prefer LSP folding if client supports it
