@@ -1,17 +1,26 @@
 export ZDOTDIR=~/.config/zsh
 skip_global_compinit=1 # prevents /etc/zsh/zshrc from calling compinit
 
-mkdir -p ~/.local/share
-export CARGO_HOME=~/.local/share/cargo
+mkdir -p ~/.local/{share,state}
+
+# state
+export LESSHISTFILE=~/.local/state/lesshst
+export NODE_REPL_HISTORY=~/.local/state/node_repl_history
+export P4TICKETS=~/.local/state/p4tickets
+export SQLITE_HISTORY=~/.local/state/sqlite_history
+
+# config
 export INPUTRC=~/.config/inputrc
-export LESSHISTFILE=~/.local/share/lesshst
-export NODE_REPL_HISTORY=~/.local/share/node_repl_history
 export NPM_CONFIG_USERCONFIG=~/.config/npmrc
 export P4ENVIRO=~/.config/p4enviro
-export P4TICKETS=~/.local/share/p4tickets
+
+# data
+export CARGO_HOME=~/.local/share/cargo
 export PYENV_ROOT=~/.local/share/pyenv
-export PYLINTHOME=~/.cache/pylint
 export RUSTUP_HOME=~/.local/share/rustup
+
+# cache
+export PYLINTHOME=~/.cache/pylint
 
 typeset -U PATH path
 if [[ $OSTYPE == linux-gnu ]]; then
