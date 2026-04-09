@@ -1,7 +1,8 @@
 [alias]
 	a = add
 	b = branch
-	c = commit
+	c = commit --verbose
+	ca = commit --amend --verbose
 	co = checkout
 	d = diff
 	ds = diff --staged
