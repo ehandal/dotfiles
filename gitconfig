@@ -11,7 +11,7 @@
 	p = pull
 	rb = rebase
 	rbi = rebase --interactive
-	rbiu = rebase --interactive @{upstream}
+	rbiu = rebase --interactive --keep-base @{upstream}
 	s = status --short --branch
 	sh = show
 	st = status
