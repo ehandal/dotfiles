@@ -49,6 +49,8 @@ path=(
     $path)
 export PATH
 
+export EDITOR=nvim
+
 export P4CONFIG=.p4config
 export P4DIFF="diff -u"
 
