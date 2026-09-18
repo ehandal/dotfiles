@@ -82,11 +82,11 @@ alias view='nvim -R'
 alias tldr='tldr --compact'
 
 if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
-    local win_name="%n@%m: %~"
-    local prompt='[%m] %1~'
+    win_name="%n@%m: %~"
+    prompt_pwd='[%m] %1~'
 else
-    local win_name="%~"
-    local prompt='%1~'
+    win_name="%~"
+    prompt_pwd='%1~'
 fi
 
 function precmd() {
@@ -116,7 +116,7 @@ function () {
     local prompt_end=$'\e]133;B\a'
 
     local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
-    PROMPT="%{$prompt_start%}%{$fg[blue]%}$prompt ${ret_status}%{$reset_color%} %{$prompt_end%}"
+    PROMPT="%{$prompt_start%}%{$fg[blue]%}$prompt_pwd ${ret_status}%{$reset_color%} %{$prompt_end%}"
 }
 
 if [[ -d ~/.local/share/zsh/functions ]] then
