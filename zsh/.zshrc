@@ -71,7 +71,6 @@ autoload -U colors && colors
 if (( $+commands[eza] )); then
     alias ls=eza
 else
-    export LSCOLORS="Gxfxcxdxbxegedabagacad"
     alias ls='ls --color=auto'
 fi
 alias ll='ls -l'
@@ -143,8 +142,8 @@ setopt complete_in_word
 setopt always_to_end
 
 zstyle ':completion:*' menu select
+(( $+commands[dircolors] )) && eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 zstyle '*' single-ignored show
