@@ -34,6 +34,19 @@ if [[ -n "${terminfo[kLFT5]}" ]]; then
 fi
 bindkey ' ' magic-space # do history expansion
 
+# Cursor shape in vi mode: block in normal mode, beam in insert mode
+function zle-keymap-select zle-line-init {
+    if [[ $KEYMAP == vicmd ]]; then
+        print -n '\e[2 q' # Block cursor
+    else
+        print -n '\e[6 q' # Beam cursor
+    fi
+}
+function zle-line-finish { print -n '\e[2 q' } # Block cursor while a command runs
+zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-line-finish
+
 setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
