@@ -1,0 +1,7 @@
+font-family = "UbuntuMono Nerd Font"
+font-size = 14
+mouse-scroll-multiplier = 0.5
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind

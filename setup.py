@@ -30,6 +30,7 @@ symlinks = (
     ('bashrc', '.bashrc'),
     ('gitconfig', f'{config_dir}/git/config'),
     ('editrc', '.editrc'),
+    ('ghostty', f'{config_dir}/'),
     ('inputrc', f'{config_dir}/'),
     ('npmrc', f'{config_dir}/'),
     ('nvim', f'{config_dir}/'),
