@@ -1,6 +1,3 @@
-autoload -Uz promptinit
-promptinit
-
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -52,7 +49,6 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
-setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups # ignore duplication command history list
@@ -80,7 +76,7 @@ alias vi=nvim
 alias view='nvim -R'
 alias tldr='tldr --compact'
 
-if [ -n "$SSH_CLIENT" -a -z "$TMUX" ]; then
+if [[ -n $SSH_CLIENT && -z $TMUX ]]; then
     win_name="%n@%m: %~"
     prompt_pwd='[%m] %1~'
 else
@@ -151,7 +147,7 @@ zstyle '*' single-ignored show
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-export GPG_TTY=`tty`
+export GPG_TTY=$(tty)
 export BAT_THEME="Catppuccin Mocha"
 
 if (( $+commands[fd] )); then
