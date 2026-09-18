@@ -60,7 +60,7 @@ setopt interactivecomments
 
 mkdir -p ~/.local/share/zsh
 HISTFILE=~/.local/share/zsh/history
-HISTSIZE=10000
+HISTSIZE=20000
 SAVEHIST=10000
 
 autoload -U colors && colors
