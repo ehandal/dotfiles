@@ -118,7 +118,7 @@ function () {
     PROMPT="%{$prompt_start%}%{$fg[blue]%}$prompt_pwd ${ret_status}%{$reset_color%} %{$prompt_end%}"
 }
 
-if [[ -d ~/.local/share/zsh/functions ]] then
+if [[ -d ~/.local/share/zsh/functions ]]; then
     fpath=(~/.local/share/zsh/functions $fpath)
 fi
 
