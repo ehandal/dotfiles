@@ -93,18 +93,16 @@ else
     typeset -gi _osc133=1
 fi
 
-# Initialize to 1 so the first prompt, which follows no command, skips the C below.
-typeset -gi _preexec_ran=1
+typeset -gi _preexec_ran=0
 
 function _precmd() {
     local exit_status=$?
     local tab_name="%15<..<%~%<<" #15 char left truncated PWD
 
-    if (( _osc133 )); then
-        # An empty line or ^C never reaches preexec, so the C that opens this
-        # command is missing. Emit it here so every D has a matching C.
-        (( _preexec_ran )) || print -n '\e]133;C\a' # start of command output
-        print -n "\e]133;D;$exit_status\a" # command finished
+    # An empty line or ^C never reaches preexec. Reporting those as commands
+    # makes iterm2 attach their status to the previous mark, so stay quiet.
+    if (( _osc133 && _preexec_ran )); then
+        print -n "\e]133;D;$exit_status\a" # command finished (OSC 133)
         _preexec_ran=0
     fi
 
