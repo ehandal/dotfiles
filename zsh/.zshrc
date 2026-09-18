@@ -89,7 +89,7 @@ else
     prompt_pwd='%1~'
 fi
 
-function precmd() {
+function _precmd() {
     local tab_name="%15<..<%~%<<" #15 char left truncated PWD
     case "$TERM" in
         mintty*|vte*|xterm*)
@@ -106,9 +106,13 @@ function precmd() {
     fi
 }
 
-function preexec() {
+function _preexec() {
     print -n '\e]133;C\a' # start of command output (OSC 133)
 }
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _precmd
+add-zsh-hook preexec _preexec
 
 function () {
     # OSC 133
