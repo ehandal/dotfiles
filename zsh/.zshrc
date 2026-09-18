@@ -94,7 +94,7 @@ else
 fi
 
 # Initialize to 1 so the first prompt, which follows no command, skips the C below.
-typeset -g _preexec_ran=1
+typeset -gi _preexec_ran=1
 
 function _precmd() {
     local exit_status=$?
