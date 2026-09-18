@@ -179,5 +179,10 @@ export FZF_DEFAULT_OPTS=" \
 
 [[ -f ~/.config/zsh/zshrc.local ]] && source ~/.config/zsh/zshrc.local
 
-source <(fzf --zsh)
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+(( $+commands[fzf] )) && source <(fzf --zsh)
+
+if (( $+commands[brew] )); then
+    zsh_highlight=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    [[ -f $zsh_highlight ]] && source $zsh_highlight
+    unset zsh_highlight
+fi
