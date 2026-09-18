@@ -35,12 +35,12 @@ bindkey ' ' magic-space # do history expansion
 # Cursor shape in vi mode: block in normal mode, beam in insert mode
 function zle-keymap-select zle-line-init {
     if [[ $KEYMAP == vicmd ]]; then
-        print -n '\e[2 q' # Block cursor
+        print -n '\e[1 q' # Blinking block cursor
     else
-        print -n '\e[6 q' # Beam cursor
+        print -n '\e[5 q' # Blinking beam cursor
     fi
 }
-function zle-line-finish { print -n '\e[2 q' } # Block cursor while a command runs
+function zle-line-finish { print -n '\e[1 q' } # Blinking block while a command runs
 zle -N zle-keymap-select
 zle -N zle-line-init
 zle -N zle-line-finish
