@@ -106,7 +106,7 @@ function precmd() {
 }
 
 function preexec() {
-    print -Pn "\e]133;C\a" # start of command output (OSC 133)
+    print -n '\e]133;C\a' # start of command output (OSC 133)
 }
 
 function () {
