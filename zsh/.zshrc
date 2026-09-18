@@ -110,11 +110,11 @@ function _precmd() {
 
     case "$TERM" in
         mintty*|vte*|xterm*)
-            print -Pn "\e]2;$win_name:q\a" # set window name
-            print -Pn "\e]1;$tab_name:q\a" # set tab name
+            print -Pn "\e]2;$win_name\a" # set window name
+            print -Pn "\e]1;$tab_name\a" # set tab name
             ;;
         tmux*)
-            print -Pn "\ek$tab_name:q\e\\" # set screen hardstatus
+            print -Pn "\ek$tab_name\e\\" # set screen hardstatus
             ;;
     esac
 
