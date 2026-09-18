@@ -84,8 +84,30 @@ else
     prompt_pwd='%1~'
 fi
 
+# Ghostty injects its own OSC 133 marks, but only into shells it spawns
+# directly: not tmux panes (TERM differs) and not ssh sessions (the env var
+# isn't forwarded). Mark the prompt ourselves everywhere else.
+if [[ $TERM == xterm-ghostty && -n $GHOSTTY_RESOURCES_DIR ]]; then
+    typeset -gi _osc133=0
+else
+    typeset -gi _osc133=1
+fi
+
+# Initialize to 1 so the first prompt, which follows no command, skips the C below.
+typeset -g _preexec_ran=1
+
 function _precmd() {
+    local exit_status=$?
     local tab_name="%15<..<%~%<<" #15 char left truncated PWD
+
+    if (( _osc133 )); then
+        # An empty line or ^C never reaches preexec, so the C that opens this
+        # command is missing. Emit it here so every D has a matching C.
+        (( _preexec_ran )) || print -n '\e]133;C\a' # start of command output
+        print -n "\e]133;D;$exit_status\a" # command finished
+        _preexec_ran=0
+    fi
+
     case "$TERM" in
         mintty*|vte*|xterm*)
             print -Pn "\e]2;$win_name:q\a" # set window name
@@ -102,7 +124,10 @@ function _precmd() {
 }
 
 function _preexec() {
-    print -n '\e]133;C\a' # start of command output (OSC 133)
+    if (( _osc133 )); then
+        _preexec_ran=1
+        print -n '\e]133;C\a' # start of command output (OSC 133)
+    fi
 }
 
 autoload -Uz add-zsh-hook
@@ -110,9 +135,11 @@ add-zsh-hook precmd _precmd
 add-zsh-hook preexec _preexec
 
 function () {
-    # OSC 133
-    local prompt_start=$'\e]133;A\a'
-    local prompt_end=$'\e]133;B\a'
+    local prompt_start prompt_end
+    if (( _osc133 )); then
+        prompt_start=$'\e]133;A\a'
+        prompt_end=$'\e]133;B\a'
+    fi
 
     local ret_status="%(?:%{$fg[green]%}$:%{$fg[red]%}$)"
     PROMPT="%{$prompt_start%}%{$fg[blue]%}$prompt_pwd ${ret_status}%{$reset_color%} %{$prompt_end%}"
