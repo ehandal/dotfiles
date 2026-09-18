@@ -8,6 +8,7 @@ zle -N down-line-or-beginning-search
 
 # vi mode
 bindkey -v
+KEYTIMEOUT=3 # 30ms, so Esc is not stalled waiting for an escape sequence
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 bindkey '^?' backward-delete-char
